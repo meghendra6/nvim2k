@@ -13,6 +13,10 @@ null_ls.setup({
     log_level = 'info',
     diagnostics_format = '#{c} #{m} (#{s})',
     sources = {
+        null_ls.builtins.formatting.stylua,
+        null_ls.builtins.formatting.black,
+        null_ls.builtins.formatting.shfmt,
+        null_ls.builtins.formatting.clang_format,
         action.proselint, -- markdown actions
         action.refactoring,
         -- action.ts_node_action, -- treesitter node actions, buggy, causes repeated notifications

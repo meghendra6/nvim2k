@@ -469,9 +469,9 @@ if util.is_present('gem') then
         ft = 'ruby',
     }
 
-    table.insert(lsp_servers, 'solargraph')
+    -- table.insert(lsp_servers, 'solargraph')
     -- table.insert(lsp_servers, 'ruby_lsp')
-    table.insert(lsp_servers, 'rubocop')
+    -- table.insert(lsp_servers, 'rubocop')
     table.insert(plugins, ror_nvim)
     table.insert(plugins, vim_rails)
 end
@@ -499,6 +499,20 @@ end
 
 if util.is_present('cargo') then
     table.insert(lsp_servers, 'rust_analyzer')
+end
+
+if util.is_present('clangd') then
+    table.insert(lsp_servers, 'clangd')
+end
+
+if util.is_present('rustup') then
+    local rust_tools = {
+        'simrat39/rust-tools.nvim',
+        config = function()
+            require('rust-tools').setup({})
+        end,
+    }
+    table.insert(plugins, rust_tools)
 end
 
 return {

@@ -88,3 +88,5 @@ vim.cmd([[
     set whichwrap+=<,>,[,],h,l
     set iskeyword+=-
  ]])
+
+vim.opt.shadafile = vim.fn.stdpath('data') .. '/shada/main.shada'

@@ -9,8 +9,7 @@ end
 
 local default_setup = function(server)
     lspconfig[server].setup({
-        capabilities =
-            require('blink.cmp').get_lsp_capabilities()
+        capabilities = require('blink.cmp').get_lsp_capabilities(),
     })
 end
 
