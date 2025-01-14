@@ -4,13 +4,13 @@ local icons = require('lib.icons')
 blink.setup({
     -- 'default', 'super-tab', 'enter'
     keymap = {
-        preset = 'enter',
-        ['<Tab>'] = { 'select_next', 'snippet_forward', 'fallback' },
-        ['<S-Tab>'] = { 'select_prev', 'snippet_backward', 'fallback' },
+        preset = 'super-tab',
+        -- ['<Tab>'] = { 'select_next', 'snippet_forward', 'fallback' },
+        -- ['<S-Tab>'] = { 'select_prev', 'snippet_backward', 'fallback' },
     },
     -- 'preselect', 'manual', 'auto_insert'
     completion = {
-        list = { selection = { preselect = false, auto_insert = true } },
+        list = { selection = { preselect = true, auto_insert = true } },
         menu = { border = 'rounded' },
         documentation = { window = { border = 'rounded' } },
     },
