@@ -124,6 +124,13 @@ local plugins = {
 
     -- Completion
     {
+        'numToStr/Comment.nvim',
+        opts = {
+            -- add any options here
+        },
+        event = 'BufReadPost',
+    },
+    {
         'saghen/blink.cmp',
         dependencies = { 'rafamadriz/friendly-snippets', 'giuxtaposition/blink-cmp-copilot' },
         version = '*',
@@ -187,21 +194,21 @@ local plugins = {
         config = load_config('tools.flash'),
         keys = {
             {
-                's',
+                'S',
                 mode = { 'n', 'x', 'o' },
                 function()
                     require('flash').jump()
                 end,
                 desc = 'Flash',
             },
-            {
-                'S',
-                mode = { 'n', 'x', 'o' },
-                function()
-                    require('flash').treesitter()
-                end,
-                desc = 'Flash Treesitter',
-            },
+            --           {
+            --               'S',
+            --               mode = { 'n', 'x', 'o' },
+            --               function()
+            --                   require('flash').treesitter()
+            --               end,
+            --               desc = 'Flash Treesitter',
+            --           },
         },
     },
     {
