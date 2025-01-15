@@ -3,18 +3,18 @@ local textobjects = require('plugins.lang.textobjects')
 
 local auto_install = require('lib.util').get_user_config('auto_install', true)
 local installed_parsers = {
-    "bash",
-    "dockerfile",
-    "html",
-    "lua",
-    "markdown",
-    "markdown_inline",
-    "regex",
-    "latex",
-    "vim",
-    "yaml",
-    "cpp",
-    "python",
+    'bash',
+    'dockerfile',
+    'html',
+    'lua',
+    'markdown',
+    'markdown_inline',
+    'regex',
+    'latex',
+    'vim',
+    'yaml',
+    'cpp',
+    'python',
 }
 
 if auto_install then
@@ -32,7 +32,7 @@ treesitter.setup({
     endwise = { enable = true },
     autotag = { enable = true },
     matchup = { enable = true },
-    indent = { enable = true },
+    indent = { enable = true, disable = { 'python' } },
 
     highlight = {
         enable = true,
