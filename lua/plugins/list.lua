@@ -115,12 +115,12 @@ local plugins = {
         config = load_config('lang.mason'),
         cmd = 'Mason',
     },
-    {
-        'nvimtools/none-ls.nvim',
-        dependencies = { 'neovim/nvim-lspconfig', 'jay-babu/mason-null-ls.nvim' },
-        config = load_config('lang.null-ls'),
-        event = { 'BufReadPost', 'BufNewFile' },
-    },
+    --    {
+    --        'nvimtools/none-ls.nvim',
+    --        dependencies = { 'neovim/nvim-lspconfig', 'jay-babu/mason-null-ls.nvim' },
+    --        config = load_config('lang.null-ls'),
+    --        event = { 'BufReadPost', 'BufNewFile' },
+    --    },
 
     -- Completion
     {
