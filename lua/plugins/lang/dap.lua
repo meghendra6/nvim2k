@@ -1,6 +1,7 @@
 local dap = require('dap')
 local dapui = require('dapui')
 local icons = require('lib.icons')
+local dap_python = require('dap-python')
 
 dapui.setup({
     icons = { expanded = icons.ui.ArrowClosed, collapsed = icons.ui.ArrowOpen },
@@ -58,10 +59,11 @@ end
 dap.listeners.before.event_exited['dapui_config'] = function()
     dapui.close()
 end
+dap_python.setup(os.getenv("CONDA_PREFIX") .. "/bin/python")
 
 dap.adapters.python = {
     type = 'executable',
-    command = '/usr/bin/python',
+    command = 'python',
     args = { '-m', 'debugpy.adapter' },
 }
 
@@ -73,6 +75,13 @@ dap.configurations.python = {
 
         program = '${file}',
         pythonPath = function()
+            -- Conda 환경의 Python 경로 감지
+            local conda_prefix = os.getenv("CONDA_PREFIX")
+            if conda_prefix then
+                return conda_prefix .. "/bin/python"
+            end
+
+            -- 프로젝트 내 가상환경 감지
             local cwd = vim.fn.getcwd()
             if vim.fn.executable(cwd .. '/venv/bin/python') == 1 then
                 return cwd .. '/venv/bin/python'

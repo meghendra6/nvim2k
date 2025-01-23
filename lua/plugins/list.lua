@@ -34,6 +34,8 @@ local plugins = {
         'mfussenegger/nvim-dap',
         dependencies = {
             'rcarriga/nvim-dap-ui',
+            'mfussenegger/nvim-dap-python',
+            'jay-babu/mason-nvim-dap.nvim',
         },
         config = load_config('lang.dap'),
         cmd = { 'DapUIToggle', 'DapToggleRepl', 'DapToggleBreakpoint' },
@@ -112,6 +114,9 @@ local plugins = {
     },
     {
         'williamboman/mason.nvim',
+        opts = {
+            ensure_installed = { "debugpy" }, -- debugpy 설치
+        },
         config = load_config('lang.mason'),
         cmd = 'Mason',
     },
@@ -121,6 +126,13 @@ local plugins = {
     --        config = load_config('lang.null-ls'),
     --        event = { 'BufReadPost', 'BufNewFile' },
     --    },
+    {
+        "jay-babu/mason-nvim-dap.nvim",
+        opts = {
+            ensure_installed = { "python" },
+            automatic_installation = true,
+        },
+    },
 
     -- Completion
     {
