@@ -422,9 +422,32 @@ local plugins = {
         'tpope/vim-fugitive',
         cmd = 'Git',
     },
+    {
+        "ojroques/vim-oscyank",
+        lazy = false,                   -- Neovim 시작 시 즉시 로드
+        config = function()
+            vim.g.oscyank_silent = true -- 성공 메시지 비활성화
+
+            -- TextYankPost 이벤트를 통해 OSCYank 실행
+            vim.api.nvim_create_autocmd("TextYankPost", {
+                callback = function()
+                    if vim.v.event.operator == "y" then
+                        local reg = vim.v.event.regname
+                        -- 기본 레지스터는 빈 문자열 대신 '"'로 처리
+                        if reg == "" then
+                            reg = '"'
+                        end
+
+                        -- OSCYank 명령 실행 (빈 레지스터 포함)
+                        vim.fn.OSCYankRegister(reg)
+                    end
+                end,
+            })
+        end,
+    },
 }
 
-local treesitter_parsers = {
+locs = {
     'bash',
     'css',
     'dart',
