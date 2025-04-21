@@ -25,7 +25,7 @@ lazy.setup({
     spec = plugins,
     lockfile = vim.fn.stdpath('config') .. '/lua/plugins/lock.json',
     concurrency = 8,
-    dev = { path = '~/Projects/2KAbhishek/', patterns = {"2kabhishek"}, fallback = true },
+    dev = { path = '~/Projects/2KAbhishek/', patterns = { '2kabhishek' }, fallback = true },
     install = { missing = true, colorscheme = { 'onedark' } },
 
     git = {
@@ -101,9 +101,9 @@ lazy.setup({
         },
     },
     readme = {
-        root = vim.fn.stdpath('state') .. '/lazy/readme',
+        root = vim.fn.stdpath('data') .. '/lazy/readme',
         files = { 'README.md', 'lua/**/README.md' },
         skip_if_doc_exists = true,
     },
-    state = vim.fn.stdpath('state') .. '/lazy/state.json',
+    state = vim.fn.stdpath('data') .. '/lazy/state.json',
 })

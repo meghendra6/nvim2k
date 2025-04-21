@@ -96,7 +96,7 @@ local plugins = {
             'RRethy/nvim-treesitter-textsubjects',
         },
         config = load_config('lang.treesitter'),
-        event = { 'BufReadPost', 'BufNewFile' },
+        event = { 'BufReadPre', 'BufNewFile' },
     },
 
     -- LSP
@@ -118,15 +118,15 @@ local plugins = {
     {
         'williamboman/mason.nvim',
         opts = {
-            ensure_installed = { "debugpy" }, -- debugpy 설치
+            ensure_installed = { 'debugpy' }, -- debugpy 설치
         },
         config = load_config('lang.mason'),
         cmd = 'Mason',
     },
     {
-        "jay-babu/mason-nvim-dap.nvim",
+        'jay-babu/mason-nvim-dap.nvim',
         opts = {
-            ensure_installed = { "python" },
+            ensure_installed = { 'python' },
             automatic_installation = true,
         },
     },
@@ -229,6 +229,7 @@ local plugins = {
         end,
         ft = 'markdown',
         cmd = { 'MarkdownPreviewToggle', 'MarkdownPreview' },
+        build = ':call mkdp#util#install()',
     },
     {
         'uga-rosa/ccc.nvim',
@@ -407,18 +408,18 @@ local plugins = {
         enabled = util.get_user_config('enable_test_runner', false),
     },
     {
-        "ojroques/vim-oscyank",
-        lazy = false,                   -- Neovim 시작 시 즉시 로드
+        'ojroques/vim-oscyank',
+        lazy = false, -- Neovim 시작 시 즉시 로드
         config = function()
             vim.g.oscyank_silent = true -- 성공 메시지 비활성화
 
             -- TextYankPost 이벤트를 통해 OSCYank 실행
-            vim.api.nvim_create_autocmd("TextYankPost", {
+            vim.api.nvim_create_autocmd('TextYankPost', {
                 callback = function()
-                    if vim.v.event.operator == "y" then
+                    if vim.v.event.operator == 'y' then
                         local reg = vim.v.event.regname
                         -- 기본 레지스터는 빈 문자열 대신 '"'로 처리
-                        if reg == "" then
+                        if reg == '' then
                             reg = '"'
                         end
 
@@ -541,7 +542,7 @@ end
 vim.tbl_extend('force', plugins, util.get_user_config('user_plugins', {}))
 vim.tbl_extend('force', lsp_servers, util.get_user_config('user_lsp_servers', {}))
 vim.tbl_extend('force', null_ls_sources, util.get_user_config('user_null_ls_sources', {}))
-vim.tbl_extend('force', treesitter_parsers, util.get_user_config('user_tresitter_parsers', {}))
+vim.tbl_extend('force', treesitter_parsers or {}, util.get_user_config('user_tresitter_parsers', {}))
 
 return {
     plugins = plugins,
