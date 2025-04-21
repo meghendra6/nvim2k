@@ -4,13 +4,19 @@ local icons = require('lib.icons')
 blink.setup({
     -- 'default', 'super-tab', 'enter'
     keymap = {
-        preset = 'super-tab',
-        -- ['<Tab>'] = { 'select_next', 'snippet_forward', 'fallback' },
-        -- ['<S-Tab>'] = { 'select_prev', 'snippet_backward', 'fallback' },
+        preset = 'enter',
+        ['<Tab>'] = { 'select_next', 'snippet_forward', 'fallback' },
+        ['<S-Tab>'] = { 'select_prev', 'snippet_backward', 'fallback' },
+        ['<C-space>'] = { 'show', 'hide' },
+        ['<C-y>'] = { 'show_documentation', 'hide_documentation' },
     },
-    -- 'preselect', 'manual', 'auto_insert'
     completion = {
-        list = { selection = { preselect = true, auto_insert = true } },
+        list = {
+            selection = {
+                auto_insert = true,
+                preselect = true,
+            },
+        },
         menu = { border = 'rounded' },
         documentation = { window = { border = 'rounded' } },
     },
@@ -23,7 +29,7 @@ blink.setup({
         kind_icons = icons.kind,
     },
     sources = {
-        default = { 'lazydev', 'lsp', 'path', 'snippets', 'buffer', 'copilot' },
+        default = { 'lazydev', 'lsp', 'path', 'snippets', 'buffer', 'copilot', 'codecompanion' },
         providers = {
             copilot = {
                 name = 'copilot',

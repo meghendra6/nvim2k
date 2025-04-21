@@ -1,3 +1,4 @@
+local util = require('lib.util')
 local function load_config(package)
     return function()
         require('plugins.' .. package)
@@ -12,6 +13,7 @@ local plugins = {
         lazy = false,
         priority = 1000,
     },
+    { 'nvim-tree/nvim-web-devicons' },
     {
         'folke/snacks.nvim',
         priority = 1000,
@@ -21,11 +23,6 @@ local plugins = {
     {
         'nvim-lualine/lualine.nvim',
         config = load_config('ui.lualine'),
-        event = { 'BufReadPost', 'BufNewFile' },
-    },
-    {
-        'stevearc/dressing.nvim',
-        config = load_config('ui.dressing'),
         event = { 'BufReadPost', 'BufNewFile' },
     },
 
@@ -62,8 +59,13 @@ local plugins = {
         config = load_config('lang.refactoring'),
     },
     {
-        'windwp/nvim-autopairs',
-        config = load_config('lang.autopairs'),
+        'echasnovski/mini.bracketed',
+        config = load_config('lang.bracketed'),
+        event = { 'BufReadPost', 'BufNewFile' },
+    },
+    {
+        'echasnovski/mini.pairs',
+        config = load_config('lang.pairs'),
         event = 'InsertEnter',
     },
     {
@@ -78,6 +80,11 @@ local plugins = {
         config = load_config('lang.ai'),
         event = { 'BufReadPost', 'BufNewFile' },
     },
+    {
+        'chrisgrieser/nvim-spider',
+        config = load_config('lang.spider'),
+        event = { 'BufReadPost', 'BufNewFile' },
+    },
 
     -- Tresitter
     {
@@ -86,20 +93,16 @@ local plugins = {
         dependencies = {
             'nvim-treesitter/nvim-treesitter-refactor',
             'nvim-treesitter/nvim-treesitter-textobjects',
-            'RRethy/nvim-treesitter-endwise',
             'RRethy/nvim-treesitter-textsubjects',
-            'windwp/nvim-ts-autotag',
         },
         config = load_config('lang.treesitter'),
         event = { 'BufReadPost', 'BufNewFile' },
     },
+
     -- LSP
     {
         'neovim/nvim-lspconfig',
-        dependencies = {
-            'williamboman/mason-lspconfig.nvim',
-            'saghen/blink.cmp',
-        },
+        dependencies = { 'williamboman/mason-lspconfig.nvim' },
         config = load_config('lang.lspconfig'),
         event = { 'BufReadPre', 'BufNewFile' },
     },
@@ -120,18 +123,18 @@ local plugins = {
         config = load_config('lang.mason'),
         cmd = 'Mason',
     },
-    --    {
-    --        'nvimtools/none-ls.nvim',
-    --        dependencies = { 'neovim/nvim-lspconfig', 'jay-babu/mason-null-ls.nvim' },
-    --        config = load_config('lang.null-ls'),
-    --        event = { 'BufReadPost', 'BufNewFile' },
-    --    },
     {
         "jay-babu/mason-nvim-dap.nvim",
         opts = {
             ensure_installed = { "python" },
             automatic_installation = true,
         },
+    },
+    {
+        'nvimtools/none-ls.nvim',
+        dependencies = { 'jay-babu/mason-null-ls.nvim' },
+        config = load_config('lang.null-ls'),
+        event = { 'BufReadPost', 'BufNewFile' },
     },
 
     -- Completion
@@ -144,7 +147,7 @@ local plugins = {
     },
     {
         'saghen/blink.cmp',
-        dependencies = { 'rafamadriz/friendly-snippets', 'giuxtaposition/blink-cmp-copilot' },
+        dependencies = { 'rafamadriz/friendly-snippets' },
         version = '*',
         config = load_config('lang.blink'),
         opts_extend = { 'sources.default' },
@@ -157,49 +160,35 @@ local plugins = {
         event = 'InsertEnter',
     },
     {
-        'CopilotC-Nvim/CopilotChat.nvim',
+        'olimorris/codecompanion.nvim',
         dependencies = {
-            { 'zbirenbaum/copilot.lua' },
-            { 'nvim-lua/plenary.nvim' },
+            'nvim-lua/plenary.nvim',
+            'nvim-treesitter/nvim-treesitter',
         },
-        branch = 'main',
-        build = 'make tiktoken', -- Only on MacOS or Linux
-        cmd = {
-            'CopilotChat',
-            'CopilotChatToggle',
-            'CopilotChatDocs',
-            'CopilotChatExplain',
-            'CopilotChatFix',
-            'CopilotChatFixDiagnostic',
-            'CopilotChatCommit',
-            'CopilotChatCommitStaged',
-            'CopilotChatLoad',
-            'CopilotChatOptimize',
-            'CopilotChatReview',
-            'CopilotChatSave',
-            'CopilotChatTests',
-        },
-        config = load_config('lang.copilot-chat'),
+        config = load_config('lang.codecompanion'),
+        event = { 'BufReadPost', 'BufNewFile' },
     },
 
     -- Tools
     {
-        'nvim-tree/nvim-tree.lua',
-        dependencies = {
-            'nvim-tree/nvim-web-devicons',
+        'echasnovski/mini.files',
+        version = '*',
+        config = load_config('tools.files'),
+        event = { 'BufReadPost', 'BufNewFile' },
+        keys = {
+            {
+                '<leader>ee',
+                function()
+                    require('mini.files').open(util.get_file_path(), true)
+                end,
+                desc = 'Explorer',
+            },
         },
-        config = load_config('tools.nvim-tree'),
-        cmd = 'NvimTreeToggle',
     },
     {
         'windwp/nvim-spectre',
         config = load_config('tools.spectre'),
         cmd = 'Spectre',
-    },
-    {
-        'abecodes/tabout.nvim',
-        config = load_config('tools.tabout'),
-        event = 'InsertEnter',
     },
     {
         'folke/flash.nvim',
@@ -226,24 +215,7 @@ local plugins = {
     {
         'numToStr/Navigator.nvim',
         config = load_config('tools.navigator'),
-        event = function()
-            if vim.fn.exists('$TMUX') == 1 then
-                return 'VeryLazy'
-            end
-        end,
-    },
-    {
-        'm4xshen/hardtime.nvim',
-        dependencies = { 'MunifTanjim/nui.nvim', 'nvim-lua/plenary.nvim' },
-        config = function()
-            require('hardtime').setup({ enabled = true })
-        end,
-        cmd = 'Hardtime',
-    },
-    {
-        'chrisgrieser/nvim-spider',
-        config = load_config('tools.spider'),
-        event = { 'BufReadPost', 'BufNewFile' },
+        event = 'VeryLazy',
     },
     {
         'folke/which-key.nvim',
@@ -263,94 +235,63 @@ local plugins = {
         config = load_config('tools.ccc'),
         cmd = { 'CccHighlighterToggle', 'CccConvert', 'CccPick' },
     },
-    {
-        '2kabhishek/termim.nvim',
-        cmd = { 'Fterm', 'FTerm', 'Sterm', 'STerm', 'Vterm', 'VTerm' },
-        -- dir = '~/Projects/2KAbhishek/termim.nvim',
-    },
-    {
-        '2kabhishek/tdo.nvim',
-        dependencies = 'nvim-telescope/telescope.nvim',
-        cmd = { 'Tdo', 'TdoEntry', 'TdoNote', 'TdoTodos', 'TdoToggle', 'TdoFind', 'TdoFiles' },
-        keys = { '[t', ']t' },
-        -- dir = '~/Projects/2KAbhishek/tdo.nvim',
-    },
-    {
-        'kndndrj/nvim-dbee',
-        dependencies = {
-            'MunifTanjim/nui.nvim',
-        },
-        build = function()
-            --    "curl", "wget", "bitsadmin", "go"
-            require('dbee').install('curl')
-        end,
-        config = load_config('tools.dbee'),
-        cmd = 'DBToggle',
-        enabled = false,
-    },
-
-    -- Telescope
-    {
-        'nvim-telescope/telescope.nvim',
-        branch = '0.1.x',
-        dependencies = {
-            'nvim-lua/plenary.nvim',
-            {
-                'nvim-telescope/telescope-fzf-native.nvim',
-                build = 'make',
-            },
-            'debugloop/telescope-undo.nvim',
-        },
-        config = load_config('tools.telescope'),
-        cmd = 'Telescope',
-    },
-    {
-        -- 'chentoast/marks.nvim',
-        '2kabhishek/markit.nvim',
-        config = load_config('tools.marks'),
-        event = { 'BufReadPost', 'BufNewFile' },
-    },
-    {
-        '2kabhishek/nerdy.nvim',
-        dependencies = { 'stevearc/dressing.nvim' },
-        cmd = 'Nerdy',
-        -- dir = '~/Projects/2KAbhishek/nerdy.nvim',
-    },
 
     -- Git
     {
-        '2kabhishek/co-author.nvim',
-        dependencies = { 'stevearc/dressing.nvim' },
-        cmd = 'CoAuthor',
-        -- dir = '~/Projects/2KAbhishek/co-author.nvim/',
+        'ruifm/gitlinker.nvim',
+        config = load_config('tools.gitlinker'),
+        keys = '<leader>yg',
+    },
+    {
+        'lewis6991/gitsigns.nvim',
+        config = load_config('tools.gitsigns'),
+        cmd = 'Gitsigns',
+        event = { 'BufReadPost', 'BufNewFile' },
+    },
+    {
+        'tpope/vim-fugitive',
+        cmd = 'Git',
+    },
+
+    -- Homegrown :)
+    {
+        '2kabhishek/pickme.nvim',
+        cmd = 'PickMe',
+        event = 'VeryLazy',
+        dependencies = {
+            'folke/snacks.nvim',
+            -- 'nvim-telescope/telescope.nvim',
+            -- 'ibhagwan/fzf-lua',
+        },
+        opts = {
+            picker_provider = 'snacks',
+        },
     },
     {
         '2kabhishek/utils.nvim',
         cmd = 'UtilsClearCache',
-        -- dir = '~/Projects/2KAbhishek/utils.nvim/',
     },
     {
-        '2kabhishek/exercism.nvim',
-        cmd = {
-            'ExercismLanguages',
-            'ExercismList',
-            'ExercismSubmit',
-            'ExercismTest',
-        },
-        keys = {
-            '<leader>exa',
-            '<leader>exl',
-            '<leader>exs',
-            '<leader>ext',
-        },
-        dependencies = {
-            '2kabhishek/utils.nvim',
-            'stevearc/dressing.nvim',
-            '2kabhishek/termim.nvim',
-        },
-        config = load_config('tools.exercism'),
-        -- opts = {},
-        -- dir = '~/Projects/2KAbhishek/exercism.nvim/',
+        '2kabhishek/co-author.nvim',
+        cmd = 'CoAuthor',
+    },
+    {
+        '2kabhishek/nerdy.nvim',
+        cmd = 'Nerdy',
+    },
+    {
+        '2kabhishek/termim.nvim',
+        cmd = { 'Fterm', 'FTerm', 'Sterm', 'STerm', 'Vterm', 'VTerm' },
+    },
+    {
+        '2kabhishek/tdo.nvim',
+        cmd = { 'Tdo', 'TdoEntry', 'TdoNote', 'TdoTodos', 'TdoToggle', 'TdoFind', 'TdoFiles' },
+        keys = { '[t', ']t' },
+    },
+    {
+        '2kabhishek/markit.nvim',
+        config = load_config('tools.markit'),
+        event = { 'BufReadPost', 'BufNewFile' },
     },
     {
         '2kabhishek/octohub.nvim',
@@ -402,25 +343,68 @@ local plugins = {
         },
         dependencies = {
             '2kabhishek/utils.nvim',
-            'nvim-telescope/telescope.nvim',
         },
         config = load_config('tools.octohub'),
-        -- dir = '~/Projects/2KAbhishek/octohub.nvim/',
     },
     {
-        'ruifm/gitlinker.nvim',
-        config = load_config('tools.gitlinker'),
-        keys = '<leader>yg',
+        '2kabhishek/exercism.nvim',
+        cmd = {
+            'ExercismLanguages',
+            'ExercismList',
+            'ExercismSubmit',
+            'ExercismTest',
+        },
+        keys = {
+            '<leader>exa',
+            '<leader>exl',
+            '<leader>exs',
+            '<leader>ext',
+        },
+        dependencies = {
+            '2kabhishek/utils.nvim',
+            '2kabhishek/termim.nvim',
+        },
+        config = load_config('tools.exercism'),
+        -- opts = {},
+        -- dir = '~/Projects/2KAbhishek/exercism.nvim/',
+    },
+
+    -- Optional
+    {
+        'm4xshen/hardtime.nvim',
+        dependencies = { 'MunifTanjim/nui.nvim', 'nvim-lua/plenary.nvim' },
+        cmd = 'Hardtime',
+        enabled = util.get_user_config('enable_trainer', false),
     },
     {
-        'lewis6991/gitsigns.nvim',
-        config = load_config('tools.gitsigns'),
-        cmd = 'Gitsigns',
-        event = { 'BufReadPost', 'BufNewFile' },
+        'kndndrj/nvim-dbee',
+        dependencies = { 'MunifTanjim/nui.nvim' },
+        build = function()
+            --    "curl", "wget", "bitsadmin", "go"
+            require('dbee').install('curl')
+        end,
+        config = load_config('tools.dbee'),
+        cmd = 'DBToggle',
+        enabled = util.get_user_config('enable_db_explorer', false),
     },
     {
-        'tpope/vim-fugitive',
-        cmd = 'Git',
+        'mfussenegger/nvim-dap',
+        dependencies = { 'rcarriga/nvim-dap-ui' },
+        config = load_config('tools.dap'),
+        cmd = { 'DapUIToggle', 'DapToggleRepl', 'DapToggleBreakpoint' },
+        enabled = util.get_user_config('enable_debugger', false),
+    },
+    {
+        'nvim-neotest/neotest',
+        dependencies = {
+            'nvim-neotest/nvim-nio',
+            'olimorris/neotest-rspec',
+            'nvim-neotest/neotest-jest',
+            'nvim-neotest/neotest-python',
+        },
+        config = load_config('tools.neotest'),
+        cmd = 'Neotest',
+        enabled = util.get_user_config('enable_test_runner', false),
     },
     {
         "ojroques/vim-oscyank",
@@ -471,18 +455,15 @@ locs = {
 }
 
 local null_ls_sources = {
-    'shellcheck', -- bash lint
+    'shellcheck',
 }
 
 local lsp_servers = {
     'bashls',
     'jsonls',
-    'lua_ls',
-    'typos_lsp', -- check typos
+    'typos_lsp',
     'vimls',
 }
-
-local util = require('lib.util')
 
 if util.is_present('npm') then
     table.insert(lsp_servers, 'eslint')
@@ -556,6 +537,11 @@ if util.is_present('rustup') then
     }
     table.insert(plugins, rust_tools)
 end
+
+vim.tbl_extend('force', plugins, util.get_user_config('user_plugins', {}))
+vim.tbl_extend('force', lsp_servers, util.get_user_config('user_lsp_servers', {}))
+vim.tbl_extend('force', null_ls_sources, util.get_user_config('user_null_ls_sources', {}))
+vim.tbl_extend('force', treesitter_parsers, util.get_user_config('user_tresitter_parsers', {}))
 
 return {
     plugins = plugins,

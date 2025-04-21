@@ -28,6 +28,20 @@ util.get_root_dir = function()
     end
 end
 
+util.get_file_path = function()
+    local buf_name = vim.api.nvim_buf_get_name(0)
+    if vim.fn.filereadable(buf_name) == 1 then
+        return buf_name
+    end
+
+    local dir_name = vim.fn.fnamemodify(buf_name, ':p:h')
+    if vim.fn.isdirectory(dir_name) == 1 then
+        return dir_name
+    end
+
+    return vim.loop.cwd()
+end
+
 util.get_file_type_cmd = function(extension)
     local root = util.get_root_dir()
 
@@ -46,21 +60,6 @@ end
 
 util.is_present = function(bin)
     return vim.fn.executable(bin) == 1
-end
-
-util.telescope_select = function(options, options_desc, select_prompt)
-    require('telescope.pickers')
-        .new({}, {
-            prompt_title = select_prompt,
-            results_title = options_desc,
-            finder = require('telescope.finders').new_table({
-                results = options,
-                entry_maker = require('telescope.make_entry').gen_from_file(),
-            }),
-            sorter = require('telescope.sorters').get_fzy_sorter(),
-            previewer = require('telescope.previewers').vim_buffer_cat.new({}),
-        })
-        :find()
 end
 
 return util
