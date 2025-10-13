@@ -456,13 +456,28 @@ locs = {
 }
 
 local null_ls_sources = {
-    'shellcheck',
+    -- Formatters
+    'stylua',        -- Lua formatter
+    'black',         -- Python formatter
+    'shfmt',         -- Shell formatter
+    'clang_format',  -- C/C++ formatter
+    'prettier',      -- JS/TS/CSS/MD formatter
+    
+    -- Linters/Diagnostics
+    'shellcheck',    -- Shell script linter
+    'actionlint',    -- GitHub Actions linter
+    'hadolint',      -- Dockerfile linter
+    'proselint',     -- Markdown/prose linter
+    'vint',          -- Vim script linter
+    'write_good',    -- English writing linter
+    'golangci_lint', -- Go linter
 }
 
 local lsp_servers = {
     'bashls',
     'jsonls',
-    'typos_lsp',
+    'lua_ls',
+    -- 'typos_lsp', -- disabled: causes -32601 errors (documentColor not supported)
     'vimls',
 }
 
@@ -514,7 +529,7 @@ end
 
 if util.is_present('pip') then
     table.insert(lsp_servers, 'ruff')
-    table.insert(lsp_servers, 'pylsp')
+    table.insert(lsp_servers, 'pyright')
 end
 
 if util.is_present('mix') then

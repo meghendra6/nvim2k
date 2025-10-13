@@ -1,4 +1,5 @@
 require('core.options')
+require('core.lsp-compat')  -- Load LSP compatibility shim early
 require('core.functions')
 require('core.keys')
 require('core.autocmd')

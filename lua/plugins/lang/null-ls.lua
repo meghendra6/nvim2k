@@ -43,13 +43,11 @@ null_ls.setup({
     },
 })
 
-local auto_install = require('lib.util').get_user_config('auto_install', true)
-local installed_sources = {}
-if auto_install then
-    installed_sources = require('plugins.list').null_ls_sources
-end
+-- Use ensure_installed list instead of automatic_installation to avoid conflicts
+-- automatic_installation tries to install packages while ensure_installed is also installing them
+local installed_sources = require('plugins.list').null_ls_sources
 
 require('mason-null-ls').setup({
     ensure_installed = installed_sources,
-    automatic_installation = auto_install,
+    automatic_installation = false,  -- Disabled to prevent duplicate installation attempts
 })

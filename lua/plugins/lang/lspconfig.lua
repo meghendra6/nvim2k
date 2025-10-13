@@ -8,8 +8,19 @@ if auto_install then
 end
 
 local default_setup = function(server)
+    local capabilities = require('blink.cmp').get_lsp_capabilities()
+    
+    -- Disable documentColor capability to prevent unsupported requests
+    if capabilities.textDocument and capabilities.textDocument.colorProvider then
+        capabilities.textDocument.colorProvider = nil
+    end
+    
+    -- Set preferred offset encoding to utf-16 for consistency across all LSP servers
+    -- This prevents "multiple different client offset_encodings detected" warnings
+    capabilities.offsetEncoding = { 'utf-16' }
+    
     lspconfig[server].setup({
-        capabilities = require('blink.cmp').get_lsp_capabilities(),
+        capabilities = capabilities,
     })
 end
 
@@ -30,7 +41,14 @@ require('mason-lspconfig').setup({
     handlers = {
         default_setup,
         lua_ls = function()
+            local capabilities = require('blink.cmp').get_lsp_capabilities()
+            if capabilities.textDocument and capabilities.textDocument.colorProvider then
+                capabilities.textDocument.colorProvider = nil
+            end
+            capabilities.offsetEncoding = { 'utf-16' }
+            
             lspconfig.lua_ls.setup({
+                capabilities = capabilities,
                 settings = {
                     Lua = {
                         runtime = { version = 'LuaJIT' },
@@ -45,6 +63,46 @@ require('mason-lspconfig').setup({
                                 align_array_table = false,
                             },
                         },
+                    },
+                },
+            })
+        end,
+        -- Python LSP: pyright (빠르고 강력한 타입 체킹)
+        pyright = function()
+            local capabilities = require('blink.cmp').get_lsp_capabilities()
+            if capabilities.textDocument and capabilities.textDocument.colorProvider then
+                capabilities.textDocument.colorProvider = nil
+            end
+            capabilities.offsetEncoding = { 'utf-16' }
+            
+            lspconfig.pyright.setup({
+                capabilities = capabilities,
+                settings = {
+                    python = {
+                        analysis = {
+                            autoSearchPaths = true,
+                            diagnosticMode = "workspace",
+                            useLibraryCodeForTypes = true,
+                            typeCheckingMode = "basic"  -- "off", "basic", "strict"
+                        }
+                    }
+                },
+            })
+        end,
+        -- Ruff는 linting/formatting만 담당
+        ruff = function()
+            local capabilities = require('blink.cmp').get_lsp_capabilities()
+            if capabilities.textDocument and capabilities.textDocument.colorProvider then
+                capabilities.textDocument.colorProvider = nil
+            end
+            -- Ruff uses utf-8 by default (hardcoded), but we request utf-16 preference
+            capabilities.offsetEncoding = { 'utf-16', 'utf-8' }
+            
+            lspconfig.ruff.setup({
+                capabilities = capabilities,
+                init_options = {
+                    settings = {
+                        args = {},
                     },
                 },
             })
