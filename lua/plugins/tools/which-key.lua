@@ -233,7 +233,7 @@ local normal_mappings = {
     { '<leader>lj', ':Lspsaga diagnostic_jump_next<cr>', desc = 'Next Diagnostic' },
     { '<leader>lk', ':Lspsaga diagnostic_jump_prev<cr>', desc = 'Prev Diagnostic' },
     { '<leader>lo', ':Lspsaga outline<cr>', desc = 'Outline' },
-    { '<leader>lp', ':Lspsaga peek_definition<cr>', desc = 'Peek Definition' },
+    { '<leader>lp', ':Lspsaga peek_definition<cr>', desc = 'Peek Definition (Float Window)' },
     { '<leader>lq', ':LspStop<cr>', desc = 'Stop LSP' },
     { '<leader>lQ', ':LspRestart<cr>', desc = 'Restart LSP' },
     { '<leader>lr', ':Lspsaga rename<cr>', desc = 'Rename' },
@@ -552,7 +552,9 @@ local no_leader_mappings = {
     { ']g', ':Gitsigns next_hunk<cr>', desc = 'Git Hunk' },
     { ']o', group = 'Textobjects' },
 
-    { 'gd', ':Lspsaga goto_definition<cr>', desc = 'Goto Definition' },
+    { 'gd', ':Lspsaga peek_definition<cr>', desc = 'Peek Definition (Select & Jump)' },
+    { 'gD', ':Lspsaga goto_definition<cr>', desc = 'Goto Definition (Direct)' },
+    { 'gf', ':Lspsaga finder<cr>', desc = 'LSP Finder (All References)' },
 }
 
 which_key.setup(setup)
