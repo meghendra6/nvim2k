@@ -29,14 +29,24 @@ treesitter.setup({
 
     textobjects = textobjects,
     matchup = { enable = true },
-    indent = { enable = true, disable = { 'python' } },
+    -- Disable indent for better performance (especially in large files)
+    indent = { 
+        enable = true, 
+        disable = { 'python', 'cpp', 'c', 'rust' }  -- Disable for slow languages
+    },
 
     highlight = {
         enable = true,
         disable = function(lang, buf)
-            local max_filesize = 100 * 1024 -- 100 KB
+            local max_filesize = 1024 * 1024 -- 1 MB (increased from 100KB)
             local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
             if ok and stats and stats.size > max_filesize then
+                return true
+            end
+            
+            -- Also check line count for better performance
+            local line_count = vim.api.nvim_buf_line_count(buf)
+            if line_count > 10000 then
                 return true
             end
         end,
@@ -74,7 +84,8 @@ treesitter.setup({
             enable = true,
             clear_on_cursor_move = true,
         },
-        highlight_current_scope = { enable = true },
+        -- Disable highlight_current_scope for better performance
+        highlight_current_scope = { enable = false },
         smart_rename = {
             enable = true,
             keymaps = {

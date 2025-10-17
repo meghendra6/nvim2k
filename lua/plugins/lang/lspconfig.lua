@@ -109,3 +109,21 @@ require('mason-lspconfig').setup({
         end,
     },
 })
+
+-- Performance: Disable LSP for large files
+vim.api.nvim_create_autocmd('BufReadPre', {
+    callback = function(args)
+        local buf = args.buf
+        local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
+        
+        if ok and stats and stats.size > 1024 * 1024 then -- 1 MB
+            vim.notify('Large file: LSP disabled for performance', vim.log.levels.WARN)
+            vim.api.nvim_buf_set_var(buf, 'large_file', true)
+            
+            -- Stop LSP for this buffer
+            vim.schedule(function()
+                vim.lsp.stop_client(vim.lsp.get_active_clients({ bufnr = buf }))
+            end)
+        end
+    end,
+})

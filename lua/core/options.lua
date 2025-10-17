@@ -10,7 +10,8 @@ local options = {
     completeopt = 'menu,menuone,noselect', -- mostly just for cmp
     conceallevel = 0, -- so that `` is visible in markdown files
     confirm = true, -- Confirm to save changes before exiting modified buffer
-    cursorline = true, -- highlight the current line
+    cursorline = false, -- disable for performance (can be slow on large files)
+    cursorlineopt = 'number', -- only highlight line number, not entire line
     expandtab = true, -- convert tabs to spaces
     fileencoding = 'utf-8', -- the encoding written to a file
     formatoptions = 'jlnqt', -- set formatoptions, check help fo-table
@@ -50,12 +51,19 @@ local options = {
     title = true, -- window titles
     undofile = true, -- enable persistent undo
     undolevels = 10000,
-    updatetime = 50, -- faster completion (4000ms default)
+    updatetime = 200, -- faster completion but not too aggressive (4000ms default, was 50)
     wildmenu = true, -- wildmenu
     wildmode = 'longest:full,full', -- Command-line completion mode
     winminwidth = 5, -- Minimum window width
     wrap = false, -- display lines as one long line
     writebackup = false, -- do not edit backups
+    
+    -- Performance optimizations
+    lazyredraw = true, -- Don't redraw during macro execution
+    synmaxcol = 200, -- Only highlight first 200 columns for performance
+    redrawtime = 1500, -- Time in ms for redrawing screen (default 2000)
+    showmatch = false, -- Don't jump to matching bracket (performance)
+    matchtime = 0, -- Disable match time for showmatch
 }
 
 for k, v in pairs(options) do
@@ -69,6 +77,23 @@ vim.g.netrw_liststyle = 1
 
 -- Fix markdown indentation settings
 vim.g.markdown_recommended_style = 0
+
+-- Performance: Disable matchparen (bracket highlighting)
+-- This is the biggest performance bottleneck according to profiling
+vim.g.loaded_matchparen = 1
+
+-- Disable other built-in plugins for performance
+vim.g.loaded_matchit = 1  -- matchit plugin
+vim.g.loaded_logiPat = 1  -- logical patterns
+vim.g.loaded_rrhelper = 1
+vim.g.loaded_tarPlugin = 1
+vim.g.loaded_man = 1
+vim.g.loaded_gzip = 1
+vim.g.loaded_zipPlugin = 1
+vim.g.loaded_2html_plugin = 1
+vim.g.loaded_shada_plugin = 1
+vim.g.loaded_spellfile_plugin = 1
+vim.g.loaded_tutor_mode_plugin = 1
 
 vim.opt.path:append({ '**' })
 vim.opt.shortmess:append({ W = true, I = true, c = true })
@@ -89,4 +114,11 @@ vim.cmd([[
     set iskeyword+=-
  ]])
 
+-- ShaDa optimization - reduce data stored for faster startup
+vim.opt.shada = "!,'100,<50,s10,h" -- Reduced from defaults
+-- ! - store global variables
+-- '100 - marks for last 100 files (reduced from 1000)
+-- <50 - max lines saved for each register (reduced from 1000)
+-- s10 - max size of item in KB (reduced from 100)
+-- h - disable hlsearch on startup
 vim.opt.shadafile = vim.fn.stdpath('data') .. '/shada/main.shada'

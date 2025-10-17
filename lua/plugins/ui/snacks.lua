@@ -58,8 +58,9 @@ Snacks.setup({
     },
     bigfile = {
         enabled = true,
-        notify = true,
-        size = 100 * 1024, -- 100 KB
+        notify = true, -- Show notification when bigfile is detected
+        size = 5 * 1024 * 1024, -- 5 MB (increased from 100KB for better usability)
+        -- Files larger than this will have some features disabled for performance
     },
     bufdelete = { enabled = true },
     dashboard = {

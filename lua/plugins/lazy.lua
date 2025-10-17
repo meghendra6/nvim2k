@@ -21,18 +21,31 @@ local plugins = require('plugins.list').plugins
 
 lazy.setup({
     root = vim.fn.stdpath('data') .. '/lazy',
-    defaults = { lazy = true },
+    defaults = { 
+        lazy = true,
+        version = false, -- Don't check version for speed
+    },
     spec = plugins,
     lockfile = vim.fn.stdpath('config') .. '/lua/plugins/lock.json',
-    concurrency = 8,
+    concurrency = nil, -- Use all available cores (nil = auto-detect)
+    -- Install/update concurrency optimization
+    install = {
+        -- Put colorscheme plugin first for faster perceived startup
+        colorscheme = { 'onedark' },
+        missing = true,
+    },
     dev = { path = '~/Projects/2KAbhishek/', patterns = { '2kabhishek' }, fallback = true },
-    install = { missing = true, colorscheme = { 'onedark' } },
 
     git = {
         log = { '--since=3 days ago' },
         timeout = 120,
         url_format = 'https://github.com/%s.git',
         filter = true,
+        throttle = {
+            enabled = true,
+            rate = 10, -- 10 ops/sec (prevent rate limiting)
+            duration = 3600 * 1000, -- 1 hour
+        },
     },
 
     ui = {
@@ -80,10 +93,23 @@ lazy.setup({
     },
 
     diff = { cmd = 'git' },
-    checker = { enabled = false, concurrency = nil, notify = true, frequency = 3600 },
-    change_detection = { enabled = true, notify = true },
+    checker = { 
+        enabled = false,  -- Disable update checking for faster startup
+        concurrency = nil,
+        notify = false,   -- Don't notify about updates
+        frequency = 86400, -- Check once per day if enabled
+    },
+    change_detection = { 
+        enabled = false,  -- Disable file change detection for speed
+        notify = false,
+    },
     performance = {
-        cache = { enabled = true },
+        cache = {
+            enabled = true,
+            path = vim.fn.stdpath('cache') .. '/lazy/cache',
+            -- disable = { 'cache' },
+            ttl = 3600 * 24 * 5, -- 5 days cache
+        },
         reset_packpath = true,
         rtp = {
             reset = true,
@@ -93,10 +119,18 @@ lazy.setup({
                 'tarPlugin',
                 'zipPlugin',
                 'tohtml',
-                -- 'tutor',
-                -- 'matchit',
-                -- 'matchparen',
-                -- 'netrwPlugin',
+                'tutor',
+                'matchit',
+                'matchparen',
+                'netrwPlugin',
+                'rplugin',
+                'getscript',
+                'getscriptPlugin',
+                'logipat',
+                'rrhelper',
+                'spellfile',
+                'vimball',
+                'vimballPlugin',
             },
         },
     },

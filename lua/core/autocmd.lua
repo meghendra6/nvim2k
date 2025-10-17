@@ -125,3 +125,59 @@ vim.api.nvim_create_user_command('WriteNoFormat', function()
     -- Re-enable the autoformat autocmd
     enable_autoformat()
 end, {})
+
+-- Performance optimization for large files
+vim.api.nvim_create_autocmd({ 'BufReadPre', 'FileReadPre' }, {
+    group = augroup('large_file_performance'),
+    callback = function(args)
+        local buf = args.buf
+        local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
+        
+        if ok and stats then
+            local size_mb = stats.size / (1024 * 1024)
+            
+            -- For files > 1MB, disable heavy features
+            if size_mb > 1 then
+                vim.notify(
+                    string.format('Large file detected (%.1f MB). Optimizing performance...', size_mb),
+                    vim.log.levels.WARN
+                )
+                
+                -- Disable syntax for very large files
+                vim.api.nvim_buf_set_option(buf, 'syntax', 'off')
+                
+                -- Disable swap, undo, and backup for large files
+                vim.api.nvim_buf_set_option(buf, 'swapfile', false)
+                vim.api.nvim_buf_set_option(buf, 'undofile', false)
+                vim.api.nvim_set_option_value('undolevels', -1, { buf = buf })
+                
+                -- Disable some vim options for better performance
+                vim.api.nvim_set_option_value('eventignore', 'all', { scope = 'local' })
+                
+                -- Schedule re-enabling events after buffer is loaded
+                vim.schedule(function()
+                    vim.api.nvim_set_option_value('eventignore', '', { scope = 'local' })
+                end)
+            end
+            
+            -- For files > 5MB, be more aggressive
+            if size_mb > 5 then
+                vim.api.nvim_buf_set_option(buf, 'foldmethod', 'manual')
+                vim.api.nvim_set_option_value('cursorline', false, { scope = 'local' })
+                vim.api.nvim_set_option_value('relativenumber', false, { scope = 'local' })
+            end
+        end
+    end,
+})
+
+-- Disable LSP semantic tokens for better performance
+vim.api.nvim_create_autocmd('LspAttach', {
+    group = augroup('lsp_performance'),
+    callback = function(args)
+        local client = vim.lsp.get_client_by_id(args.data.client_id)
+        if client then
+            -- Disable semantic tokens (can be slow on large files)
+            client.server_capabilities.semanticTokensProvider = nil
+        end
+    end,
+})

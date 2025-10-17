@@ -153,12 +153,13 @@ local plugins = {
         opts_extend = { 'sources.default' },
         event = { 'InsertEnter' },
     },
-    {
-        'zbirenbaum/copilot.lua',
-        dependencies = { 'giuxtaposition/blink-cmp-copilot' },
-        config = load_config('lang.copilot'),
-        event = 'InsertEnter',
-    },
+    -- Copilot disabled for performance
+    -- {
+    --     'zbirenbaum/copilot.lua',
+    --     dependencies = { 'giuxtaposition/blink-cmp-copilot' },
+    --     config = load_config('lang.copilot'),
+    --     event = 'InsertEnter',
+    -- },
     {
         'olimorris/codecompanion.nvim',
         dependencies = {
