@@ -213,6 +213,11 @@ local plugins = {
             --           },
         },
     },
+    -- Detect indentation style per file automatically
+    {
+        'tpope/vim-sleuth',
+        event = { 'BufReadPost', 'BufNewFile' },
+    },
     {
         'numToStr/Navigator.nvim',
         config = load_config('tools.navigator'),
