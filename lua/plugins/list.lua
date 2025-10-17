@@ -436,7 +436,6 @@ local plugins = {
 locs = {
     'bash',
     'css',
-    'dart',
     'elixir',
     'gitcommit',
     'go',
@@ -518,10 +517,6 @@ end
 
 if util.is_present('go') then
     table.insert(lsp_servers, 'gopls')
-end
-
-if util.is_present('dart') then
-    table.insert(lsp_servers, 'dartls')
 end
 
 if util.is_present('java') then
