@@ -468,9 +468,9 @@ local null_ls_sources = {
     'shellcheck',    -- Shell script linter
     'actionlint',    -- GitHub Actions linter
     'hadolint',      -- Dockerfile linter
-    'proselint',     -- Markdown/prose linter
+    -- 'proselint',  -- Disabled: deprecated pkg_resources causing errors
     'vint',          -- Vim script linter
-    'write_good',    -- English writing linter
+    'write_good',    -- English writing linter (alternative to proselint)
     'golangci_lint', -- Go linter
 }
 

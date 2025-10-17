@@ -2,13 +2,31 @@ local blink = require('blink.cmp')
 local icons = require('lib.icons')
 
 blink.setup({
-    -- 'default', 'super-tab', 'enter'
+    -- VSCode-style keybindings for completion
     keymap = {
-        preset = 'enter',
-        ['<Tab>'] = { 'select_next', 'snippet_forward', 'fallback' },
-        ['<S-Tab>'] = { 'select_prev', 'snippet_backward', 'fallback' },
+        preset = 'none', -- Start from scratch for custom bindings
+        -- Navigation (VSCode style)
+        ['<C-n>'] = { 'select_next', 'fallback' },
+        ['<C-p>'] = { 'select_prev', 'fallback' },
+        ['<Down>'] = { 'select_next', 'fallback' },
+        ['<Up>'] = { 'select_prev', 'fallback' },
+        
+        -- Accept/Confirm (VSCode style)
+        ['<Tab>'] = { 'accept', 'snippet_forward', 'fallback' },
+        ['<S-Tab>'] = { 'snippet_backward', 'fallback' },
+        ['<CR>'] = { 'accept', 'fallback' },
+        
+        -- Show/Hide
         ['<C-space>'] = { 'show', 'hide' },
+        ['<Esc>'] = { 'hide', 'fallback' },
+        
+        -- Documentation
         ['<C-y>'] = { 'show_documentation', 'hide_documentation' },
+        ['<C-e>'] = { 'hide_documentation', 'fallback' },
+        
+        -- Scrolling documentation
+        ['<C-u>'] = { 'scroll_documentation_up', 'fallback' },
+        ['<C-d>'] = { 'scroll_documentation_down', 'fallback' },
     },
     completion = {
         list = {
