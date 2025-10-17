@@ -103,7 +103,12 @@ Snacks.setup({
     explorer = { enabled = false },
     git = { enabled = true },
     gitbrowse = { enabled = true },
-    image = { enabled = true },
+    image = {
+        enabled = true,
+        convert = {
+            notify = false, -- suppress noisy notifications when conversions fail
+        },
+    },
     indent = {
         enabled = true,
         priority = 1,
@@ -337,3 +342,109 @@ Snacks.setup({
         },
     },
 })
+
+local function has_cmd(cmd)
+    return vim.fn.executable(cmd) == 1
+end
+
+do
+    local convert = require('snacks.image.convert')
+    if not convert._nvim2k_fallback then
+        local original_convert = convert.convert
+
+        local function make_stub(opts, path, err, info)
+            path = vim.fs.normalize(path)
+            local meta = { src = path, info = info }
+            local stub = {
+                file = path,
+                meta = meta,
+            }
+            function stub:run()
+                stub._done = true
+                stub._err = err
+                if opts.on_done then
+                    vim.schedule(function()
+                        opts.on_done(stub)
+                    end)
+                end
+            end
+            function stub:done()
+                return true
+            end
+            function stub:error()
+                return err
+            end
+            return stub
+        end
+
+        local function download(url)
+            local clean = url:gsub('%?.*$', '')
+            local ext = clean:match('%.([%w]+)$') or 'png'
+            local target = string.format('%s.%s', vim.fn.tempname(), ext)
+            local cmd
+            if has_cmd('curl') then
+                cmd = { 'curl', '-fsSL', url, '-o', target }
+            elseif has_cmd('wget') then
+                cmd = { 'wget', '-q', '-O', target, url }
+            end
+            if not cmd then
+                return nil, 'No downloader available'
+            end
+            vim.fn.system(cmd)
+            if vim.v.shell_error ~= 0 or vim.fn.filereadable(target) == 0 then
+                return nil, 'Failed to download image'
+            end
+            return target, nil
+        end
+
+        convert.convert = function(opts)
+            if has_cmd('magick') or has_cmd('identify') then
+                return original_convert(opts)
+            end
+
+            local src = opts.src
+            if not src or src == '' then
+                local stub = make_stub(opts, vim.fn.tempname(), 'No source provided')
+                return stub
+            end
+
+            if src:match('^file://') then
+                src = vim.uri_to_fname(src)
+            end
+
+            if src:match('^%w%w+://') then
+                local path, err = download(src)
+                if not path then
+                    return make_stub(opts, src, err or 'Failed to download image')
+                end
+                return make_stub(opts, path, nil)
+            end
+
+            local abs = vim.fs.normalize(vim.fn.fnamemodify(src, ':p'))
+            if vim.fn.filereadable(abs) == 0 then
+                return make_stub(opts, abs, ('File not found\n- `%s`'):format(abs))
+            end
+
+            local info = nil
+            if has_cmd('sips') then
+                local width = vim.fn.system({ 'sips', '-g', 'pixelWidth', abs })
+                local height = vim.fn.system({ 'sips', '-g', 'pixelHeight', abs })
+                if vim.v.shell_error == 0 then
+                    local w = tonumber(width:match(':%s*(%d+)'))
+                    local h = tonumber(height:match(':%s*(%d+)'))
+                    if w and h then
+                        info = {
+                            format = abs:match('%.([%w]+)$'),
+                            size = { width = w, height = h },
+                            dpi = { width = 72, height = 72 },
+                        }
+                    end
+                end
+            end
+
+            return make_stub(opts, abs, nil, info)
+        end
+
+        convert._nvim2k_fallback = true
+    end
+end

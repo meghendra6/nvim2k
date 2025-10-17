@@ -238,6 +238,15 @@ local plugins = {
         build = ':call mkdp#util#install()',
     },
     {
+        'MeanderingProgrammer/render-markdown.nvim',
+        ft = { 'markdown' },
+        dependencies = {
+            'nvim-treesitter/nvim-treesitter',
+            'nvim-tree/nvim-web-devicons',
+        },
+        config = load_config('ui.render_markdown'),
+    },
+    {
         'uga-rosa/ccc.nvim',
         config = load_config('tools.ccc'),
         cmd = { 'CccHighlighterToggle', 'CccConvert', 'CccPick' },
