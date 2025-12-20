@@ -44,7 +44,7 @@ lazy.setup({
         throttle = {
             enabled = true,
             rate = 10, -- 10 ops/sec (prevent rate limiting)
-            duration = 3600 * 1000, -- 1 hour
+            duration = 1000, -- reset throttle window every 1s (avoid long waits)
         },
     },
 
