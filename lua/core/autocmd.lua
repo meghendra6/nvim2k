@@ -106,25 +106,14 @@ vim.api.nvim_create_autocmd('FileType', {
     end,
 })
 
-local function enable_autoformat()
-    vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
-        group = augroup('autoformat'),
-        pattern = { '*' },
-        callback = function()
-            vim.lsp.buf.format()
-        end,
-    })
-end
-
-enable_autoformat()
-
 vim.api.nvim_create_user_command('WriteNoFormat', function()
-    -- Temporarily disable the autoformat autocmd
-    vim.api.nvim_del_augroup_by_name('nvim2k_autoformat')
+    -- Temporarily disable autoformat-on-save
+    vim.b.disable_autoformat = true
     vim.cmd('write')
-    -- Re-enable the autoformat autocmd
-    enable_autoformat()
+    -- Re-enable autoformat-on-save
+    vim.b.disable_autoformat = false
 end, {})
+
 
 -- Performance optimization for large files
 vim.api.nvim_create_autocmd({ 'BufReadPre', 'FileReadPre' }, {

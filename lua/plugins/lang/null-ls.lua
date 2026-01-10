@@ -13,10 +13,7 @@ null_ls.setup({
     log_level = 'info',
     diagnostics_format = '#{c} #{m} (#{s})',
     sources = {
-        null_ls.builtins.formatting.stylua,
-        null_ls.builtins.formatting.black,
-        null_ls.builtins.formatting.shfmt,
-        null_ls.builtins.formatting.clang_format,
+        -- Formatters are now handled by conform.nvim
         -- action.proselint, -- Disabled: deprecated pkg_resources warnings
         action.refactoring,
         -- action.ts_node_action, -- treesitter node actions, buggy, causes repeated notifications
@@ -33,11 +30,6 @@ null_ls.setup({
         diag.trail_space, -- trailing space check
         diag.vint, -- vim lint
         diag.write_good, -- english writing style (alternative to proselint)
-        format.mix, -- elixir formatter
-        format.prettier, -- js, md, css, etc formatter
-        -- format.rubocop, -- ruby formatter
-        format.shfmt, -- shell formatter
-        format.stylua, -- lua formatter
         hover.dictionary, -- show word dictionary on hover
         hover.printenv, -- show env on hover
     },

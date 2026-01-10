@@ -43,6 +43,19 @@ map('n', 'N', 'Nzzzv', opts)
 map('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 map('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 
+-- Window Navigation
+map('n', '<C-h>', '<C-w>h', opts)
+map('n', '<C-j>', '<C-w>j', opts)
+map('n', '<C-k>', '<C-w>k', opts)
+map('n', '<C-l>', '<C-w>l', opts)
+
+-- Buffer Navigation
+map('n', '<S-h>', '<cmd>bprevious<cr>', opts)
+map('n', '<S-l>', '<cmd>bnext<cr>', opts)
+
+-- Quick Save
+map({ 'n', 'i', 'v' }, '<C-s>', '<cmd>w<cr><esc>', { desc = 'Save file' })
+
 -- Move text up and down
 map({ 'v', 'x' }, 'J', ":move '>+1<cr>gv-gv", opts)
 map({ 'v', 'x' }, 'K', ":move '<-2<cr>gv-gv", opts)

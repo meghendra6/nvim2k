@@ -59,7 +59,11 @@ local setup = {
 
 local normal_mappings = {
     mode = 'n',
-    { '<leader>x', ':x<cr>', desc = ' Save and Quit' },
+    { '<leader>x', group = ' Trouble' },
+    { '<leader>xx', '<cmd>Trouble diagnostics toggle<cr>', desc = 'Diagnostics' },
+    { '<leader>xX', '<cmd>Trouble diagnostics toggle filter.buf=0<cr>', desc = 'Buffer Diagnostics' },
+    { '<leader>xL', '<cmd>Trouble loclist toggle<cr>', desc = 'Location List' },
+    { '<leader>xQ', '<cmd>Trouble qflist toggle<cr>', desc = 'Quickfix List' },
 
     { '<leader>a', group = ' AI' },
     { '<leader>aa', ':CodeCompanionActions<cr>', desc = 'Code Companion Actions' },
@@ -87,15 +91,15 @@ local normal_mappings = {
     { '<leader>cc', '<cmd>CccHighlighterToggle<cr>', desc = 'Highlight Colors' },
     { '<leader>cd', '<cmd>RootDir<cr>', desc = 'Root Directory' },
     { '<leader>ce', '<cmd>%SnipRun<cr>', desc = 'Execute File' },
-    { '<leader>cf', '<cmd>lua vim.lsp.buf.format({async = true})<cr>', desc = 'Format File' },
+    { '<leader>cf', '<cmd>lua require("conform").format({async = true, lsp_fallback = true})<cr>', desc = 'Format File' },
     { '<leader>ch', '<cmd>Hardtime toggle<cr>', desc = 'Hardtime' },
-    { '<leader>cl', '<cmd>:g/^\\s*$/d<cr>', desc = 'Clean Empty Lines' },
+    { '<leader>cl', '<cmd>Trouble lsp toggle focus=false win.position=right<cr>', desc = 'LSP Trouble' },
     { '<leader>cm', '<cmd>MarkdownPreviewToggle<cr>', desc = 'Markdown Preview' },
     { '<leader>cn', '<cmd>lua require("snacks").notifier.show_history()<cr>', desc = 'Notifications' },
     { '<leader>co', '<cmd>Dashboard<cr>', desc = 'Dashboard' },
     { '<leader>cp', '<cmd>CccPick<cr>', desc = 'Pick Color' },
     { '<leader>cr', '<cmd>Telescope reloader<cr>', desc = 'Reload Module' },
-    { '<leader>cs', '<cmd>source %<cr>', desc = 'Source File' },
+    { '<leader>cs', '<cmd>Trouble symbols toggle focus=false<cr>', desc = 'Symbols (Trouble)' },
 
     { '<leader>e', group = ' Edit' },
     { '<leader>ea', ':b#<cr>', desc = 'Alternate File' },
@@ -384,7 +388,6 @@ local normal_mappings = {
     { '<leader>ww', '<cmd>w<cr>', desc = 'Write' },
     { '<leader>wz', '<cmd>lua require("snacks").zen.zen()<cr>', desc = 'Zen' },
     { '<leader>wZ', '<cmd>lua require("snacks").zen.zoom()<cr>', desc = 'Zoom' },
-    { '<leader>x', '<cmd>x<cr>', desc = ' Save and Quit' },
 
     { '<leader>y', group = ' Yank' },
     { '<leader>yL', ':CopyAbsolutePathWithLine<cr>', desc = 'Absolute Path with Line' },
