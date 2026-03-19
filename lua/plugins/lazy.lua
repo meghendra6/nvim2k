@@ -27,7 +27,7 @@ lazy.setup({
     },
     spec = plugins,
     lockfile = vim.fn.stdpath('config') .. '/lua/plugins/lock.json',
-    concurrency = nil, -- Use all available cores (nil = auto-detect)
+    concurrency = 4, -- Limit concurrency to prevent 'fetch waiting'
     -- Install/update concurrency optimization
     install = {
         -- Put colorscheme plugin first for faster perceived startup

@@ -91,9 +91,9 @@ local plugins = {
         'nvim-treesitter/nvim-treesitter',
         build = ':TSUpdate',
         dependencies = {
-            'nvim-treesitter/nvim-treesitter-refactor',
+            -- 'nvim-treesitter/nvim-treesitter-refactor',
             'nvim-treesitter/nvim-treesitter-textobjects',
-            'RRethy/nvim-treesitter-textsubjects',
+            -- 'RRethy/nvim-treesitter-textsubjects',
         },
         config = load_config('lang.treesitter'),
         event = { 'BufReadPre', 'BufNewFile' },
