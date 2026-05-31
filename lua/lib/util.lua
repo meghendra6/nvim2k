@@ -20,8 +20,8 @@ util.get_root_dir = function()
     end
 
     local parent = vim.fn.fnamemodify(bufname, ':h')
-    local git_root = vim.fn.systemlist('git -C ' .. parent .. ' rev-parse --show-toplevel')
-    if #git_root > 0 and git_root[1] ~= '' then
+    local git_root = vim.fn.systemlist({ 'git', '-C', parent, 'rev-parse', '--show-toplevel' })
+    if vim.v.shell_error == 0 and #git_root > 0 and git_root[1] ~= '' then
         return git_root[1]
     else
         return parent

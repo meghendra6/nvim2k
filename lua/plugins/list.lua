@@ -1,4 +1,14 @@
 local util = require('lib.util')
+
+local function dropbar(action)
+    return function()
+        if not _G.dropbar then
+            require('dropbar').setup()
+        end
+        require('dropbar.api')[action]()
+    end
+end
+
 local function load_config(package)
     return function()
         require('plugins.' .. package)
@@ -25,29 +35,32 @@ local plugins = {
         config = load_config('ui.lualine'),
         event = { 'BufReadPost', 'BufNewFile' },
     },
+    {
+        'Bekaboo/dropbar.nvim',
+        event = { 'BufReadPost', 'BufNewFile' },
+        config = function()
+            require('dropbar').setup()
+        end,
+        keys = {
+            {
+                '<leader>;',
+                dropbar('pick'),
+                desc = 'Pick Breadcrumb',
+            },
+            {
+                '[;',
+                dropbar('goto_context_start'),
+                desc = 'Context Start',
+            },
+            {
+                '];',
+                dropbar('select_next_context'),
+                desc = 'Next Context',
+            },
+        },
+    },
 
     -- Language
-    {
-        'mfussenegger/nvim-dap',
-        dependencies = {
-            'rcarriga/nvim-dap-ui',
-            'mfussenegger/nvim-dap-python',
-            'jay-babu/mason-nvim-dap.nvim',
-        },
-        config = load_config('lang.dap'),
-        cmd = { 'DapUIToggle', 'DapToggleRepl', 'DapToggleBreakpoint' },
-    },
-    {
-        'nvim-neotest/neotest',
-        dependencies = {
-            'nvim-neotest/nvim-nio',
-            'olimorris/neotest-rspec',
-            'nvim-neotest/neotest-jest',
-            'nvim-neotest/neotest-python',
-        },
-        config = load_config('lang.neotest'),
-        cmd = 'Neotest',
-    },
     {
         'michaelb/sniprun',
         build = 'bash ./install.sh',
@@ -117,18 +130,8 @@ local plugins = {
     },
     {
         'williamboman/mason.nvim',
-        opts = {
-            ensure_installed = { 'debugpy' }, -- debugpy 설치
-        },
         config = load_config('lang.mason'),
         cmd = 'Mason',
-    },
-    {
-        'jay-babu/mason-nvim-dap.nvim',
-        opts = {
-            ensure_installed = { 'python' },
-            automatic_installation = true,
-        },
     },
     {
         'nvimtools/none-ls.nvim',
@@ -139,11 +142,10 @@ local plugins = {
 
     -- Completion
     {
-        'numToStr/Comment.nvim',
-        opts = {
-            -- add any options here
-        },
-        event = 'BufReadPost',
+        'folke/ts-comments.nvim',
+        opts = {},
+        event = 'VeryLazy',
+        enabled = vim.fn.has('nvim-0.10.0') == 1,
     },
     {
         'saghen/blink.cmp',
@@ -227,6 +229,25 @@ local plugins = {
                 '<leader>xQ',
                 '<cmd>Trouble qflist toggle<cr>',
                 desc = 'Quickfix List (Trouble)',
+            },
+            {
+                '<leader>xt',
+                '<cmd>Trouble todo toggle<cr>',
+                desc = 'Todo Comments (Trouble)',
+            },
+        },
+    },
+    {
+        'folke/todo-comments.nvim',
+        dependencies = { 'nvim-lua/plenary.nvim' },
+        config = load_config('tools.todo-comments'),
+        event = { 'BufReadPost', 'BufNewFile' },
+        cmd = { 'TodoQuickFix', 'TodoLocList' },
+        keys = {
+            {
+                '<leader>xT',
+                '<cmd>TodoQuickFix<cr>',
+                desc = 'Todo Comments (Quickfix)',
             },
         },
     },
@@ -315,19 +336,6 @@ local plugins = {
 
     -- Homegrown :)
     {
-        '2kabhishek/pickme.nvim',
-        cmd = 'PickMe',
-        event = 'VeryLazy',
-        dependencies = {
-            'folke/snacks.nvim',
-            -- 'nvim-telescope/telescope.nvim',
-            -- 'ibhagwan/fzf-lua',
-        },
-        opts = {
-            picker_provider = 'snacks',
-        },
-    },
-    {
         '2kabhishek/utils.nvim',
         cmd = 'UtilsClearCache',
     },
@@ -336,99 +344,16 @@ local plugins = {
         cmd = 'CoAuthor',
     },
     {
-        '2kabhishek/nerdy.nvim',
-        cmd = 'Nerdy',
-    },
-    {
-        '2kabhishek/termim.nvim',
-        cmd = { 'Fterm', 'FTerm', 'Sterm', 'STerm', 'Vterm', 'VTerm' },
-    },
-    {
         '2kabhishek/tdo.nvim',
         cmd = { 'Tdo', 'TdoEntry', 'TdoNote', 'TdoTodos', 'TdoToggle', 'TdoFind', 'TdoFiles' },
         keys = { '[t', ']t' },
     },
     {
         '2kabhishek/markit.nvim',
+        dependencies = { '2kabhishek/pickme.nvim' },
         config = load_config('tools.markit'),
         event = { 'BufReadPost', 'BufNewFile' },
     },
-    {
-        '2kabhishek/octohub.nvim',
-        cmd = {
-            'OctoRepos',
-            'OctoReposByCreated',
-            'OctoReposByForks',
-            'OctoReposByIssues',
-            'OctoReposByLanguages',
-            'OctoReposByNames',
-            'OctoReposByPushed',
-            'OctoReposBySize',
-            'OctoReposByStars',
-            'OctoReposByUpdated',
-            'OctoReposTypeArchived',
-            'OctoReposTypeForked',
-            'OctoReposTypePrivate',
-            'OctoReposTypeStarred',
-            'OctoReposTypeTemplate',
-            'OctoRepo',
-            'OctoStats',
-            'OctoActivityStats',
-            'OctoContributionStats',
-            'OctoRepoStats',
-            'OctoProfile',
-            'OctoRepoWeb',
-        },
-        keys = {
-            '<leader>goa',
-            '<leader>goA',
-            '<leader>gob',
-            '<leader>goc',
-            '<leader>gof',
-            '<leader>goF',
-            '<leader>gog',
-            '<leader>goi',
-            '<leader>gol',
-            '<leader>goo',
-            '<leader>gop',
-            '<leader>goP',
-            '<leader>gor',
-            '<leader>gos',
-            '<leader>goS',
-            '<leader>got',
-            '<leader>goT',
-            '<leader>gou',
-            '<leader>goU',
-            '<leader>gow',
-        },
-        dependencies = {
-            '2kabhishek/utils.nvim',
-        },
-        config = load_config('tools.octohub'),
-    },
-    {
-        '2kabhishek/exercism.nvim',
-        cmd = {
-            'ExercismLanguages',
-            'ExercismList',
-            'ExercismSubmit',
-            'ExercismTest',
-        },
-        keys = {
-            '<leader>exa',
-            '<leader>exl',
-            '<leader>exs',
-            '<leader>ext',
-        },
-        dependencies = {
-            '2kabhishek/utils.nvim',
-            '2kabhishek/termim.nvim',
-        },
-        config = load_config('tools.exercism'),
-        -- opts = {},
-        -- dir = '~/Projects/2KAbhishek/exercism.nvim/',
-    },
-
     -- Optional
     {
         'm4xshen/hardtime.nvim',
@@ -449,9 +374,21 @@ local plugins = {
     },
     {
         'mfussenegger/nvim-dap',
-        dependencies = { 'rcarriga/nvim-dap-ui' },
+        dependencies = {
+            'rcarriga/nvim-dap-ui',
+            'mfussenegger/nvim-dap-python',
+            'jay-babu/mason-nvim-dap.nvim',
+        },
         config = load_config('tools.dap'),
         cmd = { 'DapUIToggle', 'DapToggleRepl', 'DapToggleBreakpoint' },
+        enabled = util.get_user_config('enable_debugger', false),
+    },
+    {
+        'jay-babu/mason-nvim-dap.nvim',
+        opts = {
+            ensure_installed = { 'python' },
+            automatic_installation = true,
+        },
         enabled = util.get_user_config('enable_debugger', false),
     },
     {
@@ -515,19 +452,19 @@ local treesitter_parsers = {
 
 local null_ls_sources = {
     -- Formatters
-    'stylua',        -- Lua formatter
-    'black',         -- Python formatter
-    'shfmt',         -- Shell formatter
-    'clang_format',  -- C/C++ formatter
-    'prettier',      -- JS/TS/CSS/MD formatter
-    
+    'stylua', -- Lua formatter
+    'black', -- Python formatter
+    'shfmt', -- Shell formatter
+    'clang_format', -- C/C++ formatter
+    'prettier', -- JS/TS/CSS/MD formatter
+
     -- Linters/Diagnostics
-    'shellcheck',    -- Shell script linter
-    'actionlint',    -- GitHub Actions linter
-    'hadolint',      -- Dockerfile linter
+    'shellcheck', -- Shell script linter
+    'actionlint', -- GitHub Actions linter
+    'hadolint', -- Dockerfile linter
     -- 'proselint',  -- Disabled: deprecated pkg_resources causing errors
-    'vint',          -- Vim script linter
-    'write_good',    -- English writing linter (alternative to proselint)
+    'vint', -- Vim script linter
+    'write_good', -- English writing linter (alternative to proselint)
     'golangci_lint', -- Go linter
 }
 
@@ -598,20 +535,41 @@ if util.is_present('clangd') then
     table.insert(lsp_servers, 'clangd')
 end
 
-if util.is_present('rustup') then
-    local rust_tools = {
-        'simrat39/rust-tools.nvim',
-        config = function()
-            require('rust-tools').setup({})
-        end,
-    }
-    table.insert(plugins, rust_tools)
+local function append_items(target, items)
+    if type(items) ~= 'table' then
+        return
+    end
+
+    for _, item in ipairs(items) do
+        table.insert(target, item)
+    end
 end
 
-vim.tbl_extend('force', plugins, util.get_user_config('user_plugins', {}))
-vim.tbl_extend('force', lsp_servers, util.get_user_config('user_lsp_servers', {}))
-vim.tbl_extend('force', null_ls_sources, util.get_user_config('user_null_ls_sources', {}))
-vim.tbl_extend('force', treesitter_parsers or {}, util.get_user_config('user_tresitter_parsers', {}))
+local function append_unique_strings(target, items)
+    if type(items) ~= 'table' then
+        return
+    end
+
+    local seen = {}
+    for _, item in ipairs(target) do
+        if type(item) == 'string' then
+            seen[item] = true
+        end
+    end
+
+    for _, item in ipairs(items) do
+        if type(item) == 'string' and item ~= '' and not seen[item] then
+            table.insert(target, item)
+            seen[item] = true
+        end
+    end
+end
+
+append_items(plugins, util.get_user_config('user_plugins', {}))
+append_unique_strings(lsp_servers, util.get_user_config('user_lsp_servers', {}))
+append_unique_strings(null_ls_sources, util.get_user_config('user_null_ls_sources', {}))
+append_unique_strings(treesitter_parsers, util.get_user_config('user_treesitter_parsers', {}))
+append_unique_strings(treesitter_parsers, util.get_user_config('user_tresitter_parsers', {}))
 
 return {
     plugins = plugins,

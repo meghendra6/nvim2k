@@ -15,6 +15,6 @@ neotest.setup({
             jestCommand = 'npx jest --',
             jestConfigFile = 'jest.config.js',
         }),
-        require('neotest-python'),
+        require('neotest-python')({}),
     },
 })

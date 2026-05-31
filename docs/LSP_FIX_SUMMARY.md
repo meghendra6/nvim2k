@@ -117,7 +117,7 @@ nvim --headless file.py -c 'lua vim.lsp.buf.hover()' +qa 2>&1 | grep -i "encodin
 **Result:** ✅ PASS - No warnings
 
 ### Test 3: LSP Functionality
-- ✅ Goto Definition (`<leader>lg`)
+- ✅ Goto Definition (`<leader>ld`)
 - ✅ Hover Documentation (`<leader>lh`)
 - ✅ Code Actions (`<leader>la`)
 - ✅ Diagnostics (linting/errors)

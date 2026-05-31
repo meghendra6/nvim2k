@@ -2,7 +2,7 @@ local markit = require('markit')
 local icons = require('lib.icons')
 
 markit.setup({
-    default_mappings = true,
+    add_default_keybindings = false,
     builtin_marks = { '.', '<', '>', '^' },
     cyclic = true,
     force_write_shada = false,
@@ -29,9 +29,5 @@ markit.setup({
         sign = icons.ui.Bug,
         virt_text = 'bug',
         annotate = false,
-    },
-    mappings = {
-        set = 'M',
-        toggle_mark = 'm',
     },
 })

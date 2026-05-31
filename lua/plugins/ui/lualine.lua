@@ -58,6 +58,18 @@ local conditions = {
     end,
 }
 
+local function all_conditions(...)
+    local checks = { ... }
+    return function()
+        for _, check in ipairs(checks) do
+            if not check() then
+                return false
+            end
+        end
+        return true
+    end
+end
+
 local codecompanion = require('lualine.component'):extend()
 codecompanion.processing = false
 codecompanion.spinner_index = 1
@@ -112,7 +124,7 @@ local fileformat = { 'fileformat', icons_enabled = true, color = { fg = colors.w
 
 local filename = {
     'filename',
-    cond = conditions.buffer_not_empty and conditions.buffer_is_file and conditions.buffer_not_scratch,
+    cond = all_conditions(conditions.buffer_not_empty, conditions.buffer_is_file, conditions.buffer_not_scratch),
     color = { fg = colors.magenta, gui = 'bold' },
 }
 

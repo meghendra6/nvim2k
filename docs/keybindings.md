@@ -14,37 +14,32 @@ Sources:
 
 > Leader == <kbd>Space</kbd>
 
+### ; - Breadcrumb
+
+| Keybinding                       | Action          |
+| -------------------------------- | --------------- |
+| <kbd>Leader</kbd> <kbd> ; </kbd> | Pick Breadcrumb |
+
 ### a - AI
 
 | Keybinding                         | Action         |
 | ---------------------------------- | -------------- |
-| <kbd>Leader</kbd> <kbd> a c </kbd> | Copilot Chat   |
-| <kbd>Leader</kbd> <kbd> a d </kbd> | Docs           |
-| <kbd>Leader</kbd> <kbd> a e </kbd> | Explain        |
-| <kbd>Leader</kbd> <kbd> a f </kbd> | Fix            |
-| <kbd>Leader</kbd> <kbd> a F </kbd> | Fix Diagnostic |
-| <kbd>Leader</kbd> <kbd> a g </kbd> | Commit         |
-| <kbd>Leader</kbd> <kbd> a G </kbd> | Commit Staged  |
-| <kbd>Leader</kbd> <kbd> a l </kbd> | Load Chat      |
-| <kbd>Leader</kbd> <kbd> a o </kbd> | Optimize       |
-| <kbd>Leader</kbd> <kbd> a r </kbd> | Review         |
-| <kbd>Leader</kbd> <kbd> a s </kbd> | Save Chat      |
-| <kbd>Leader</kbd> <kbd> a t </kbd> | Tests          |
-
-### b - Debugging
-
-| Keybinding                         | Action        |
-| ---------------------------------- | ------------- |
-| <kbd>Leader</kbd> <kbd> b b </kbd> | Breakpoint    |
-| <kbd>Leader</kbd> <kbd> b c </kbd> | Continue      |
-| <kbd>Leader</kbd> <kbd> b i </kbd> | Into          |
-| <kbd>Leader</kbd> <kbd> b l </kbd> | Last          |
-| <kbd>Leader</kbd> <kbd> b o </kbd> | Over          |
-| <kbd>Leader</kbd> <kbd> b O </kbd> | Out           |
-| <kbd>Leader</kbd> <kbd> b r </kbd> | Repl          |
-| <kbd>Leader</kbd> <kbd> b R </kbd> | Restart Frame |
-| <kbd>Leader</kbd> <kbd> b t </kbd> | Debugger      |
-| <kbd>Leader</kbd> <kbd> b x </kbd> | Exit          |
+| <kbd>Leader</kbd> <kbd> a a </kbd> | Code Companion Actions |
+| <kbd>Leader</kbd> <kbd> a c </kbd> | Copilot Chat |
+| <kbd>Leader</kbd> <kbd> a C </kbd> | Copilot Claude |
+| <kbd>Leader</kbd> <kbd> a d </kbd> | GitHub Deepseek |
+| <kbd>Leader</kbd> <kbd> a f </kbd> | Copilot Fast |
+| <kbd>Leader</kbd> <kbd> a g </kbd> | Copilot GPT |
+| <kbd>Leader</kbd> <kbd> a l </kbd> | GitHub Ollama |
+| <kbd>Leader</kbd> <kbd> a o </kbd> | Ollama Deepseek Coder |
+| <kbd>Leader</kbd> <kbd> a s </kbd> | Copilot Gemini |
+| <kbd>Leader</kbd> <kbd> a p d </kbd> | Docs |
+| <kbd>Leader</kbd> <kbd> a p e </kbd> | Explain |
+| <kbd>Leader</kbd> <kbd> a p f </kbd> | Fix |
+| <kbd>Leader</kbd> <kbd> a p g </kbd> | Commit |
+| <kbd>Leader</kbd> <kbd> a p o </kbd> | Optimize |
+| <kbd>Leader</kbd> <kbd> a p r </kbd> | Review |
+| <kbd>Leader</kbd> <kbd> a p t </kbd> | Tests |
 
 ### c - Code
 
@@ -55,16 +50,14 @@ Sources:
 | <kbd>Leader</kbd> <kbd> c e </kbd> | Execute File      |
 | <kbd>Leader</kbd> <kbd> c f </kbd> | Format File       |
 | <kbd>Leader</kbd> <kbd> c F </kbd> | Fix Tabs          |
-| <kbd>Leader</kbd> <kbd> c h </kbd> | Hardtime          |
-| <kbd>Leader</kbd> <kbd> c l </kbd> | Clean Empty Lines |
+| <kbd>Leader</kbd> <kbd> c l </kbd> | LSP Trouble       |
 | <kbd>Leader</kbd> <kbd> c m </kbd> | Markdown Preview  |
 | <kbd>Leader</kbd> <kbd> c n </kbd> | Notifications     |
 | <kbd>Leader</kbd> <kbd> c o </kbd> | Dashboard         |
 | <kbd>Leader</kbd> <kbd> c p </kbd> | Pick Color        |
 | <kbd>Leader</kbd> <kbd> c P </kbd> | Convert Color     |
-| <kbd>Leader</kbd> <kbd> c r </kbd> | Reload Module     |
 | <kbd>Leader</kbd> <kbd> c R </kbd> | Reload Configs    |
-| <kbd>Leader</kbd> <kbd> c s </kbd> | Source File       |
+| <kbd>Leader</kbd> <kbd> c s </kbd> | Symbols           |
 
 ### e - Edit
 
@@ -89,37 +82,36 @@ Sources:
 | <kbd>Leader</kbd> <kbd> e c v </kbd> | Vim Config         |
 | <kbd>Leader</kbd> <kbd> e c z </kbd> | Zsh Config         |
 | <kbd>Leader</kbd> <kbd> e c Z </kbd> | Zsh Prompt Config  |
+| <kbd>Leader</kbd> <kbd> e E </kbd>   | Project Explorer   |
 | <kbd>Leader</kbd> <kbd> e e </kbd>   | Explorer           |
 | <kbd>Leader</kbd> <kbd> e f </kbd>   | File Under Cursor  |
 | <kbd>Leader</kbd> <kbd> e m </kbd>   | Readme             |
 | <kbd>Leader</kbd> <kbd> e n </kbd>   | New File           |
-| <kbd>Leader</kbd> <kbd> e x </kbd>   | Exercism           |
-| <kbd>Leader</kbd> <kbd> e x a </kbd> | Exercises          |
-| <kbd>Leader</kbd> <kbd> e x l </kbd> | Languages          |
-| <kbd>Leader</kbd> <kbd> e x s </kbd> | Submit Solution    |
-| <kbd>Leader</kbd> <kbd> e x t </kbd> | Run Tests          |
+| <kbd>Leader</kbd> <kbd> e w </kbd>   | CWD Explorer       |
 
 ### f - Find
 
-| Keybinding                            | Action             |
-| ------------------------------------- | ------------------ |
-| <kbd>Leader</kbd> <kbd> f 1..9 </kbd> | Jump to File       |
-| <kbd>Leader</kbd> <kbd> f a </kbd>    | All Files          |
-| <kbd>Leader</kbd> <kbd> f c </kbd>    | File Commits       |
-| <kbd>Leader</kbd> <kbd> f f </kbd>    | Find files         |
-| <kbd>Leader</kbd> <kbd> f g </kbd>    | Find Text          |
-| <kbd>Leader</kbd> <kbd> f j </kbd>    | Buffers            |
-| <kbd>Leader</kbd> <kbd> f l </kbd>    | Location List      |
-| <kbd>Leader</kbd> <kbd> f m </kbd>    | Modified files     |
-| <kbd>Leader</kbd> <kbd> f o </kbd>    | Find in Open Files |
-| <kbd>Leader</kbd> <kbd> f p </kbd>    | Last Search        |
-| <kbd>Leader</kbd> <kbd> f P </kbd>    | Plugin Files       |
-| <kbd>Leader</kbd> <kbd> f q </kbd>    | Quickfix           |
-| <kbd>Leader</kbd> <kbd> f r </kbd>    | Recent Files       |
-| <kbd>Leader</kbd> <kbd> f s </kbd>    | Fuzzy Find in File |
-| <kbd>Leader</kbd> <kbd> f t </kbd>    | Panel              |
-| <kbd>Leader</kbd> <kbd> f u </kbd>    | Undo History       |
-| <kbd>Leader</kbd> <kbd> f w </kbd>    | Find Word          |
+| Keybinding                            | Action               |
+| ------------------------------------- | -------------------- |
+| <kbd>Leader</kbd> <kbd> f 1..9 </kbd> | Jump to File         |
+| <kbd>Leader</kbd> <kbd> f B </kbd>    | Search Buffers       |
+| <kbd>Leader</kbd> <kbd> f b </kbd>    | Buffers              |
+| <kbd>Leader</kbd> <kbd> f c </kbd>    | Config Files         |
+| <kbd>Leader</kbd> <kbd> f f </kbd>    | Files                |
+| <kbd>Leader</kbd> <kbd> f g </kbd>    | Git Files            |
+| <kbd>Leader</kbd> <kbd> f h </kbd>    | Help                 |
+| <kbd>Leader</kbd> <kbd> f j </kbd>    | Jumps                |
+| <kbd>Leader</kbd> <kbd> f L </kbd>    | Location List        |
+| <kbd>Leader</kbd> <kbd> f l </kbd>    | Lines                |
+| <kbd>Leader</kbd> <kbd> f p </kbd>    | Projects             |
+| <kbd>Leader</kbd> <kbd> f q </kbd>    | Quickfix             |
+| <kbd>Leader</kbd> <kbd> f r </kbd>    | Recent Files         |
+| <kbd>Leader</kbd> <kbd> f S </kbd>    | Smart Find           |
+| <kbd>Leader</kbd> <kbd> f s </kbd>    | Search Text          |
+| <kbd>Leader</kbd> <kbd> f u </kbd>    | Undo History         |
+| <kbd>Leader</kbd> <kbd> f w </kbd>    | Word                 |
+| <kbd>Leader</kbd> <kbd> f x </kbd>    | Close except current |
+| <kbd>Leader</kbd> <kbd> f z </kbd>    | Zoxide               |
 
 ### g - Git
 
@@ -129,22 +121,22 @@ Sources:
 | <kbd>Leader</kbd> <kbd> g A </kbd>   | Stage Buffer    |
 | <kbd>Leader</kbd> <kbd> g b </kbd>   | Blame           |
 | <kbd>Leader</kbd> <kbd> g B </kbd>   | Detailed Blame  |
-| <kbd>Leader</kbd> <kbd> g c </kbd>   | Find Commits    |
+| <kbd>Leader</kbd> <kbd> g c </kbd>   | Commit Staged   |
 | <kbd>Leader</kbd> <kbd> g C </kbd>   | Co-Authors      |
 | <kbd>Leader</kbd> <kbd> g d </kbd>   | Diff            |
-| <kbd>Leader</kbd> <kbd> g f </kbd>   | Fugitive Panel  |
+| <kbd>Leader</kbd> <kbd> g F </kbd>   | Fugitive Panel  |
 | <kbd>Leader</kbd> <kbd> g g </kbd>   | Lazygit         |
 | <kbd>Leader</kbd> <kbd> g i </kbd>   | Hunk Info       |
 | <kbd>Leader</kbd> <kbd> g j </kbd>   | Next Hunk       |
 | <kbd>Leader</kbd> <kbd> g k </kbd>   | Prev Hunk       |
-| <kbd>Leader</kbd> <kbd> g l </kbd>   | Lazygit Log     |
-| <kbd>Leader</kbd> <kbd> g L </kbd>   | Log             |
+| <kbd>Leader</kbd> <kbd> g l </kbd>   | File Log        |
+| <kbd>Leader</kbd> <kbd> g L </kbd>   | Git Log         |
 | <kbd>Leader</kbd> <kbd> g p </kbd>   | Pull            |
 | <kbd>Leader</kbd> <kbd> g P </kbd>   | Push            |
 | <kbd>Leader</kbd> <kbd> g r </kbd>   | Reset Hunk      |
 | <kbd>Leader</kbd> <kbd> g R </kbd>   | Reset Buffer    |
 | <kbd>Leader</kbd> <kbd> g s </kbd>   | Switch Branch   |
-| <kbd>Leader</kbd> <kbd> g S </kbd>   | Stashed Changes |
+| <kbd>Leader</kbd> <kbd> g S </kbd>   | Changed Files   |
 | <kbd>Leader</kbd> <kbd> g t b </kbd> | Blame           |
 | <kbd>Leader</kbd> <kbd> g t d </kbd> | Deleted         |
 | <kbd>Leader</kbd> <kbd> g t l </kbd> | Line HL         |
@@ -155,39 +147,14 @@ Sources:
 | <kbd>Leader</kbd> <kbd> g v </kbd>   | Select Hunk     |
 | <kbd>Leader</kbd> <kbd> g w </kbd>   | Git Browse      |
 
-#### go - Octohub
+#### go - GitHub
 
-| Keybinding                             | Action           |
-| -------------------------------------- | ---------------- |
-| <kbd>Leader</kbd> <kbd> g o a </kbd>   | All Repos        |
-| <kbd>Leader</kbd> <kbd> g o A </kbd>   | Activity Stats   |
-| <kbd>Leader</kbd> <kbd> g o b </kbd>   | Archived Repos   |
-| <kbd>Leader</kbd> <kbd> g o c </kbd>   | Repos by Created |
-| <kbd>Leader</kbd> <kbd> g o f </kbd>   | Repos by Forks   |
-| <kbd>Leader</kbd> <kbd> g o F </kbd>   | Forked Repos     |
-| <kbd>Leader</kbd> <kbd> g o g </kbd>   | Repos by Language |
-| <kbd>Leader</kbd> <kbd> g o i </kbd>   | Repos by Issues  |
-| <kbd>Leader</kbd> <kbd> g o l </kbd>   | Repos by Stars   |
-| <kbd>Leader</kbd> <kbd> g o o </kbd>   | Repos by Name    |
-| <kbd>Leader</kbd> <kbd> g o p </kbd>   | Repos by Last Push |
-| <kbd>Leader</kbd> <kbd> g o P </kbd>   | Profile          |
-| <kbd>Leader</kbd> <kbd> g o r </kbd>   | Open Repo        |
-| <kbd>Leader</kbd> <kbd> g o s </kbd>   | Repos by Size    |
-| <kbd>Leader</kbd> <kbd> g o S </kbd>   | Starred Repos    |
-| <kbd>Leader</kbd> <kbd> g o t </kbd>   | Repos by Updated |
-| <kbd>Leader</kbd> <kbd> g o T </kbd>   | Template Repos   |
-| <kbd>Leader</kbd> <kbd> g o u </kbd>   | User Stats       |
-| <kbd>Leader</kbd> <kbd> g o U </kbd>   | Private Repos    |
-| <kbd>Leader</kbd> <kbd> g o w </kbd>   | Open in Browser  |
-
-### h - Help
-
-| Keybinding                         | Action           |
-| ---------------------------------- | ---------------- |
-| <kbd>Leader</kbd> <kbd> h h </kbd> | Help Pages       |
-| <kbd>Leader</kbd> <kbd> h i </kbd> | Inspect Position |
-| <kbd>Leader</kbd> <kbd> h k </kbd> | Hover Doc        |
-| <kbd>Leader</kbd> <kbd> h m </kbd> | Man Pages        |
+| Keybinding                             | Action                 |
+| -------------------------------------- | ---------------------- |
+| <kbd>Leader</kbd> <kbd> g o i </kbd>   | Open Issues            |
+| <kbd>Leader</kbd> <kbd> g o I </kbd>   | All Issues             |
+| <kbd>Leader</kbd> <kbd> g o p </kbd>   | Open Pull Requests     |
+| <kbd>Leader</kbd> <kbd> g o P </kbd>   | All Pull Requests      |
 
 ### i - Insert
 
@@ -195,10 +162,9 @@ Sources:
 | ---------------------------------- | ------------- |
 | <kbd>Leader</kbd> <kbd> i d </kbd> | Date          |
 | <kbd>Leader</kbd> <kbd> i f </kbd> | File Name     |
-| <kbd>Leader</kbd> <kbd> i n </kbd> | Nerd Glyphs   |
+| <kbd>Leader</kbd> <kbd> i n </kbd> | Icons         |
 | <kbd>Leader</kbd> <kbd> i P </kbd> | Absolute Path |
 | <kbd>Leader</kbd> <kbd> i p </kbd> | Relative Path |
-| <kbd>Leader</kbd> <kbd> i r </kbd> | Registers     |
 | <kbd>Leader</kbd> <kbd> i t </kbd> | Time          |
 
 ### j - Jump
@@ -207,7 +173,6 @@ Sources:
 | ---------------------------------- | ----------------- |
 | <kbd>Leader</kbd> <kbd> j c </kbd> | Word              |
 | <kbd>Leader</kbd> <kbd> j d </kbd> | Diagnostics       |
-| <kbd>Leader</kbd> <kbd> j f </kbd> | Jumplist          |
 | <kbd>Leader</kbd> <kbd> j h </kbd> | Backward          |
 | <kbd>Leader</kbd> <kbd> j j </kbd> | Remote            |
 | <kbd>Leader</kbd> <kbd> j k </kbd> | Treesitter        |
@@ -215,45 +180,39 @@ Sources:
 | <kbd>Leader</kbd> <kbd> j n </kbd> | Search Forward    |
 | <kbd>Leader</kbd> <kbd> j N </kbd> | Search Backward   |
 | <kbd>Leader</kbd> <kbd> j p </kbd> | Previous Jump     |
+| <kbd>Leader</kbd> <kbd> j R </kbd> | Prev Reference    |
+| <kbd>Leader</kbd> <kbd> j r </kbd> | Next Reference    |
 | <kbd>Leader</kbd> <kbd> j s </kbd> | Search            |
 | <kbd>Leader</kbd> <kbd> j t </kbd> | Remote Treesitter |
 | <kbd>Leader</kbd> <kbd> j w </kbd> | Current Word      |
-
-### k - Keys
-
-| Keybinding                         | Action          |
-| ---------------------------------- | --------------- |
-| <kbd>Leader</kbd> <kbd> k c </kbd> | Commands        |
-| <kbd>Leader</kbd> <kbd> k h </kbd> | Command History |
-| <kbd>Leader</kbd> <kbd> k k </kbd> | Keymaps         |
-| <kbd>Leader</kbd> <kbd> k s </kbd> | Search History  |
 
 ### l - LSP
 
 | Keybinding                         | Action                |
 | ---------------------------------- | --------------------- |
 | <kbd>Leader</kbd> <kbd> l a </kbd> | Code Action           |
-| <kbd>Leader</kbd> <kbd> l d </kbd> | Peek Definition       |
+| <kbd>Leader</kbd> <kbd> l C </kbd> | Outgoing Calls        |
+| <kbd>Leader</kbd> <kbd> l c </kbd> | Incoming Calls        |
+| <kbd>Leader</kbd> <kbd> l d </kbd> | Goto Definition       |
 | <kbd>Leader</kbd> <kbd> l f </kbd> | Finder                |
 | <kbd>Leader</kbd> <kbd> l F </kbd> | References            |
-| <kbd>Leader</kbd> <kbd> l g </kbd> | Goto Definition       |
 | <kbd>Leader</kbd> <kbd> l h </kbd> | Hover                 |
-| <kbd>Leader</kbd> <kbd> l i </kbd> | LSP Info              |
+| <kbd>Leader</kbd> <kbd> l I </kbd> | LSP Info              |
+| <kbd>Leader</kbd> <kbd> l i </kbd> | Implementations       |
 | <kbd>Leader</kbd> <kbd> l j </kbd> | Next Diagnostic       |
 | <kbd>Leader</kbd> <kbd> l k </kbd> | Prev Diagnostic       |
 | <kbd>Leader</kbd> <kbd> l L </kbd> | Workspace Diagnostics |
-| <kbd>Leader</kbd> <kbd> l l </kbd> | File Diagnostics      |
+| <kbd>Leader</kbd> <kbd> l l </kbd> | Buffer Diagnostics    |
 | <kbd>Leader</kbd> <kbd> l o </kbd> | Outline               |
-| <kbd>Leader</kbd> <kbd> l p </kbd> | Incoming Calls        |
-| <kbd>Leader</kbd> <kbd> l P </kbd> | Outgoing Calls        |
+| <kbd>Leader</kbd> <kbd> l p </kbd> | Peek Definition       |
 | <kbd>Leader</kbd> <kbd> l q </kbd> | Stop LSP              |
 | <kbd>Leader</kbd> <kbd> l Q </kbd> | Restart LSP           |
 | <kbd>Leader</kbd> <kbd> l R </kbd> | Replace               |
 | <kbd>Leader</kbd> <kbd> l r </kbd> | Rename                |
 | <kbd>Leader</kbd> <kbd> l s </kbd> | Document Symbols      |
 | <kbd>Leader</kbd> <kbd> l S </kbd> | Workspace Symbols     |
-| <kbd>Leader</kbd> <kbd> l T </kbd> | Goto Type Definition  |
-| <kbd>Leader</kbd> <kbd> l t </kbd> | Peek Type Definition  |
+| <kbd>Leader</kbd> <kbd> l T </kbd> | Peek Type Definition  |
+| <kbd>Leader</kbd> <kbd> l t </kbd> | Goto Type Definition  |
 
 ### Marks
 
@@ -262,33 +221,24 @@ Sources:
 | <kbd>Leader</kbd> <kbd> m b </kbd>   | Bookmarks           |
 | <kbd>Leader</kbd> <kbd> m d </kbd>   | Delete Line         |
 | <kbd>Leader</kbd> <kbd> m D </kbd>   | Delete Buffer       |
-| <kbd>Leader</kbd> <kbd> m h </kbd>   | Next Bookmark       |
+| <kbd>Leader</kbd> <kbd> m h </kbd>   | Previous Bookmark   |
 | <kbd>Leader</kbd> <kbd> m j </kbd>   | Next                |
 | <kbd>Leader</kbd> <kbd> m k </kbd>   | Previous            |
-| <kbd>Leader</kbd> <kbd> m l </kbd>   | Previous Bookmark   |
-| <kbd>Leader</kbd> <kbd> m m </kbd>   | All Marks           |
-| <kbd>Leader</kbd> <kbd> m n 1 </kbd> | Next Bookmark 1     |
-| <kbd>Leader</kbd> <kbd> m n 2 </kbd> | Next Bookmark 2     |
-| <kbd>Leader</kbd> <kbd> m n 3 </kbd> | Next Bookmark 3     |
-| <kbd>Leader</kbd> <kbd> m n 4 </kbd> | Next Bookmark 4     |
-| <kbd>Leader</kbd> <kbd> m p 1 </kbd> | Previous Bookmark 1 |
-| <kbd>Leader</kbd> <kbd> m p 2 </kbd> | Previous Bookmark 2 |
-| <kbd>Leader</kbd> <kbd> m p 3 </kbd> | Previous Bookmark 3 |
-| <kbd>Leader</kbd> <kbd> m p 4 </kbd> | Previous Bookmark 4 |
+| <kbd>Leader</kbd> <kbd> m l </kbd>   | Next Bookmark       |
+| <kbd>Leader</kbd> <kbd> m n 1..9 </kbd> | Next Group Bookmarks |
+| <kbd>Leader</kbd> <kbd> m p 1..9 </kbd> | Previous Group Bookmarks |
 | <kbd>Leader</kbd> <kbd> m P </kbd>   | Preview             |
 | <kbd>Leader</kbd> <kbd> m s </kbd>   | Set Next            |
 | <kbd>Leader</kbd> <kbd> m t </kbd>   | Toggle              |
 | <kbd>Leader</kbd> <kbd> m x </kbd>   | Delete Bookmark     |
-| <kbd>Leader</kbd> <kbd> m 1 </kbd>   | Toggle Bookmark 0   |
-| <kbd>Leader</kbd> <kbd> m 2 </kbd>   | Toggle Bookmark 2   |
-| <kbd>Leader</kbd> <kbd> m 3 </kbd>   | Toggle Bookmark 3   |
-| <kbd>Leader</kbd> <kbd> m 4 </kbd>   | Toggle Bookmark 4   |
+| <kbd>Leader</kbd> <kbd> m 1..9 </kbd> | Toggle Group Bookmark |
 
 ### n - Notes
 
 | Keybinding                         | Action           |
 | ---------------------------------- | ---------------- |
 | <kbd>Leader</kbd> <kbd> n a </kbd> | Select Scratch   |
+| <kbd>Leader</kbd> <kbd> n 1..9 </kbd> | Future Todos |
 | <kbd>Leader</kbd> <kbd> n c </kbd> | Commit Note      |
 | <kbd>Leader</kbd> <kbd> n d </kbd> | Today's Todo     |
 | <kbd>Leader</kbd> <kbd> n e </kbd> | Today's Entry    |
@@ -297,6 +247,7 @@ Sources:
 | <kbd>Leader</kbd> <kbd> n h </kbd> | Yesterday's Todo |
 | <kbd>Leader</kbd> <kbd> n l </kbd> | Tomorrow's Todo  |
 | <kbd>Leader</kbd> <kbd> n n </kbd> | New Note         |
+| <kbd>Leader</kbd> <kbd> n p 1..9 </kbd> | Past Todos |
 | <kbd>Leader</kbd> <kbd> n s </kbd> | New Scratch      |
 | <kbd>Leader</kbd> <kbd> n t </kbd> | Incomplete Todos |
 | <kbd>Leader</kbd> <kbd> n x </kbd> | Toggle Todo      |
@@ -305,10 +256,15 @@ Sources:
 
 | Keybinding                         | Action           |
 | ---------------------------------- | ---------------- |
-| <kbd>Leader</kbd> <kbd> o c </kbd> | Colorscheme      |
-| <kbd>Leader</kbd> <kbd> o h </kbd> | Highlight Colors |
-| <kbd>Leader</kbd> <kbd> o n </kbd> | Relative Numbers |
-| <kbd>Leader</kbd> <kbd> o o </kbd> | All Options      |
+| <kbd>Leader</kbd> <kbd> o D </kbd> | Toggle Dimming   |
+| <kbd>Leader</kbd> <kbd> o d </kbd> | Toggle Diagnostics |
+| <kbd>Leader</kbd> <kbd> o g </kbd> | Toggle Indent Guides |
+| <kbd>Leader</kbd> <kbd> o h </kbd> | Toggle Inlay Hints |
+| <kbd>Leader</kbd> <kbd> o i </kbd> | Inspect Position |
+| <kbd>Leader</kbd> <kbd> o N </kbd> | Notification History |
+| <kbd>Leader</kbd> <kbd> o r </kbd> | Relative Numbers |
+| <kbd>Leader</kbd> <kbd> o t </kbd> | Toggle Colorscheme |
+| <kbd>Leader</kbd> <kbd> o w </kbd> | Toggle LSP Words |
 
 ### p - Packages
 
@@ -317,7 +273,7 @@ Sources:
 | <kbd>Leader</kbd> <kbd> p c </kbd> | Check            |
 | <kbd>Leader</kbd> <kbd> p d </kbd> | Debug            |
 | <kbd>Leader</kbd> <kbd> p e </kbd> | Profiler Scratch |
-| <kbd>Leader</kbd> <kbd> p f </kbd> | Profiler Find    |
+| <kbd>Leader</kbd> <kbd> p f </kbd> | Profiler Pick    |
 | <kbd>Leader</kbd> <kbd> p i </kbd> | Install          |
 | <kbd>Leader</kbd> <kbd> p l </kbd> | Log              |
 | <kbd>Leader</kbd> <kbd> p m </kbd> | Mason            |
@@ -347,6 +303,7 @@ Sources:
 | Keybinding                         | Action               |
 | ---------------------------------- | -------------------- |
 | <kbd>Leader</kbd> <kbd> r b </kbd> | Replace Buffer       |
+| <kbd>Leader</kbd> <kbd> r c </kbd> | Rails Commands       |
 | <kbd>Leader</kbd> <kbd> r e </kbd> | Extract Block        |
 | <kbd>Leader</kbd> <kbd> r f </kbd> | Extract To File      |
 | <kbd>Leader</kbd> <kbd> r i </kbd> | Inline Variable      |
@@ -397,26 +354,6 @@ Sources:
 | <kbd>Leader</kbd> <kbd> t v </kbd> | Vertical Terminal   |
 | <kbd>Leader</kbd> <kbd> t w </kbd> | Exe Launcher, Wait  |
 
-### u - Test
-
-| Keybinding                         | Action           |
-| ---------------------------------- | ---------------- |
-| <kbd>Leader</kbd> <kbd> u c </kbd> | Run Current Test |
-| <kbd>Leader</kbd> <kbd> u f </kbd> | Run Test File    |
-| <kbd>Leader</kbd> <kbd> u o </kbd> | Test Output      |
-| <kbd>Leader</kbd> <kbd> u s </kbd> | Test Summary     |
-
-### v - Select
-
-| Keybinding                         | Action         |
-| ---------------------------------- | -------------- |
-| <kbd>Leader</kbd> <kbd> v B </kbd> | Around Bracket |
-| <kbd>Leader</kbd> <kbd> v b </kbd> | Bracket        |
-| <kbd>Leader</kbd> <kbd> v P </kbd> | Around Para    |
-| <kbd>Leader</kbd> <kbd> v p </kbd> | Paragraph      |
-| <kbd>Leader</kbd> <kbd> v Q </kbd> | Around Quote   |
-| <kbd>Leader</kbd> <kbd> v q </kbd> | Quote          |
-
 ### w - Writing
 
 | Keybinding                         | Action                   |
@@ -434,11 +371,16 @@ Sources:
 | <kbd>Leader</kbd> <kbd> w z </kbd> | Zen                      |
 | <kbd>Leader</kbd> <kbd> w Z </kbd> | Zoom                     |
 
-### x - Exit
+### x - Trouble
 
-| Keybinding                       | Action        |
-| -------------------------------- | ------------- |
-| <kbd>Leader</kbd> <kbd> x </kbd> | Save and Quit |
+| Keybinding                         | Action               |
+| ---------------------------------- | -------------------- |
+| <kbd>Leader</kbd> <kbd> x x </kbd> | Diagnostics          |
+| <kbd>Leader</kbd> <kbd> x X </kbd> | Buffer Diagnostics   |
+| <kbd>Leader</kbd> <kbd> x L </kbd> | Location List        |
+| <kbd>Leader</kbd> <kbd> x Q </kbd> | Quickfix List        |
+| <kbd>Leader</kbd> <kbd> x t </kbd> | Todo Comments        |
+| <kbd>Leader</kbd> <kbd> x T </kbd> | Todo Comments Quickfix |
 
 ### y - Yank
 
@@ -447,7 +389,9 @@ Sources:
 | <kbd>Leader</kbd> <kbd> y a </kbd> | Copy Whole File |
 | <kbd>Leader</kbd> <kbd> y f </kbd> | File Name       |
 | <kbd>Leader</kbd> <kbd> y g </kbd> | Copy Git URL    |
+| <kbd>Leader</kbd> <kbd> y L </kbd> | Absolute Path with Line |
 | <kbd>Leader</kbd> <kbd> y P </kbd> | Absolute Path   |
+| <kbd>Leader</kbd> <kbd> y l </kbd> | Relative Path with Line |
 | <kbd>Leader</kbd> <kbd> y p </kbd> | Relative Path   |
 
 ## Leader Bindings (Visual Mode)
@@ -456,13 +400,11 @@ Sources:
 
 | Keybinding                         | Action         |
 | ---------------------------------- | -------------- |
-| <kbd>Leader</kbd> <kbd> a c </kbd> | Copilot Chat   |
+| <kbd>Leader</kbd> <kbd> a c </kbd> | Chat           |
 | <kbd>Leader</kbd> <kbd> a d </kbd> | Docs           |
 | <kbd>Leader</kbd> <kbd> a e </kbd> | Explain        |
 | <kbd>Leader</kbd> <kbd> a f </kbd> | Fix            |
-| <kbd>Leader</kbd> <kbd> a F </kbd> | Fix Diagnostic |
 | <kbd>Leader</kbd> <kbd> a g </kbd> | Commit         |
-| <kbd>Leader</kbd> <kbd> a G </kbd> | Commit Staged  |
 | <kbd>Leader</kbd> <kbd> a o </kbd> | Optimize       |
 | <kbd>Leader</kbd> <kbd> a r </kbd> | Review         |
 | <kbd>Leader</kbd> <kbd> a t </kbd> | Tests          |
@@ -484,6 +426,7 @@ Sources:
 | ---------------------------------- | ---------- |
 | <kbd>Leader</kbd> <kbd> g a </kbd> | Stage Hunk |
 | <kbd>Leader</kbd> <kbd> g r </kbd> | Reset Hunk |
+| <kbd>Leader</kbd> <kbd> g u </kbd> | Undo Stage Hunk |
 
 ### j - Jump
 
@@ -509,7 +452,6 @@ Sources:
 
 | Keybinding                         | Action            |
 | ---------------------------------- | ----------------- |
-| <kbd>Leader</kbd> <kbd> r r </kbd> | Refactor Commands |
 | <kbd>Leader</kbd> <kbd> r e </kbd> | Extract Function  |
 | <kbd>Leader</kbd> <kbd> r f </kbd> | Extract To File   |
 | <kbd>Leader</kbd> <kbd> r v </kbd> | Extract Variable  |
@@ -527,29 +469,36 @@ Sources:
 | ---------------------------------- | ---------------------- |
 | <kbd>K</kbd>                       | LSP Hover              |
 | <kbd>Q</kbd>                       | Force Quit!            |
+| <kbd>S</kbd>                       | Flash                  |
 | <kbd>U</kbd>                       | Redo                   |
+| <kbd>g d</kbd>                     | Peek Definition        |
+| <kbd>g D</kbd>                     | Goto Definition        |
+| <kbd>g f</kbd>                     | LSP Finder             |
+| <kbd>g h</kbd>                     | Beginning of Line      |
+| <kbd>g l</kbd>                     | End of Line            |
 | <kbd>Shift</kbd> + <kbd>H</kbd>    | Previous Buffer        |
 | <kbd>Shift</kbd> + <kbd>L</kbd>    | Next Buffer            |
+| <kbd>Ctrl</kbd> + <kbd>S</kbd>     | Save File              |
 | <kbd>Ctrl</kbd> + <kbd>H</kbd>     | Move Left              |
 | <kbd>Ctrl</kbd> + <kbd>J</kbd>     | Move Down              |
 | <kbd>Ctrl</kbd> + <kbd>K</kbd>     | Move Up                |
 | <kbd>Ctrl</kbd> + <kbd>L</kbd>     | Move Right             |
+| <kbd>Ctrl</kbd> + <kbd>\</kbd>     | Previous Pane          |
 | <kbd>Ctrl</kbd> + <kbd>Up</kbd>    | Increase window height |
 | <kbd>Ctrl</kbd> + <kbd>Down</kbd>  | Decrease window height |
 | <kbd>Ctrl</kbd> + <kbd>Left</kbd>  | Decrease window width  |
 | <kbd>Ctrl</kbd> + <kbd>Right</kbd> | Increase window width  |
-| <kbd>Ctrl</kbd> + <kbd>F</kbd>     | Find Files             |
 | <kbd>Ctrl</kbd> + <kbd>G</kbd>     | Lazygit                |
 
 ### [ - Previous
 
 | Keybinding                | Action       |
 | ------------------------- | ------------ |
+| <kbd>[</kbd> <kbd>;</kbd> | Context Start |
 | <kbd>[</kbd> <kbd>b</kbd> | Buffer       |
-| <kbd>[</kbd> <kbd>c</kbd> | Change       |
+| <kbd>[</kbd> <kbd>c</kbd> | Comment      |
 | <kbd>[</kbd> <kbd>B</kbd> | First Buffer |
 | <kbd>[</kbd> <kbd>d</kbd> | Diagnostic   |
-| <kbd>[</kbd> <kbd>e</kbd> | Edit         |
 | <kbd>[</kbd> <kbd>g</kbd> | Git Hunk     |
 | <kbd>[</kbd> <kbd>j</kbd> | Jump         |
 
@@ -557,10 +506,10 @@ Sources:
 
 | Keybinding                | Action      |
 | ------------------------- | ----------- |
+| <kbd>]</kbd> <kbd>;</kbd> | Next Context |
 | <kbd>]</kbd> <kbd>b</kbd> | Buffer      |
-| <kbd>]</kbd> <kbd>c</kbd> | Change      |
+| <kbd>]</kbd> <kbd>c</kbd> | Comment     |
 | <kbd>]</kbd> <kbd>B</kbd> | Last Buffer |
 | <kbd>]</kbd> <kbd>d</kbd> | Diagnostic  |
-| <kbd>]</kbd> <kbd>e</kbd> | Edit        |
 | <kbd>]</kbd> <kbd>g</kbd> | Git Hunk    |
 | <kbd>]</kbd> <kbd>j</kbd> | Jump        |

@@ -1,7 +1,7 @@
 # LSP Offset Encoding Warning Fix
 
 ## Problem
-When using `<leader>lg` (Goto Definition) or other LSP operations, warning popups appeared:
+When using `<leader>ld` (Goto Definition) or other LSP operations, warning popups appeared:
 
 ```
 warning: multiple different client offset_encodings detected for buffer, 
@@ -111,14 +111,14 @@ This is why mixing encodings can cause position mismatches.
 ### Before Fix
 ```bash
 vi /workspace/distribute/deepspeed-rbln/examples/llama_lora/test_llama_lora_rbln.py
-# Press <leader>lg
+# Press <leader>ld
 # Result: Warning popup appears
 ```
 
 ### After Fix
 ```bash
 vi /workspace/distribute/deepspeed-rbln/examples/llama_lora/test_llama_lora_rbln.py
-# Press <leader>lg
+# Press <leader>ld
 # Result: Goes to definition without warnings ✓
 ```
 

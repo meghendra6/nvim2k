@@ -57,9 +57,10 @@ end,
 #### 추가 LSP 단축키:
 - `gd`: 정의로 이동 (Lspsaga)
 - `<leader>ld`: 정의로 이동 (Lspsaga)
-- `<leader>lD`: 정의 미리보기 (Peek Definition)
+- `<leader>lp`: 정의 미리보기 (Peek Definition)
 - `<leader>lr`: 심볼 이름 변경 (Rename)
-- `<leader>lf`: 레퍼런스 찾기 (Find References)
+- `<leader>lf`: LSP Finder
+- `<leader>lF`: 레퍼런스 찾기 (References)
 - `K`: 함수/클래스 설명 보기 (Hover Documentation)
 
 ---
@@ -76,17 +77,17 @@ end,
 #### 🔎 버퍼 검색 및 선택
 | 단축키 | 기능 | 설명 |
 |--------|------|------|
-| `<leader>fb` | 버퍼 목록 (빠른 접근) | Telescope로 버퍼 검색 및 전환 |
-| `<leader>fj` | 버퍼 목록 (전체) | 모든 열린 버퍼 목록 보기 |
-| `<leader>fo` | 열린 파일에서 검색 | 현재 열린 버퍼들 내에서 텍스트 검색 |
+| `<leader>fb` | 버퍼 목록 | Snacks picker로 버퍼 검색 및 전환 |
+| `<leader>fr` | 최근 파일 | 최근에 열었던 파일 목록 보기 |
+| `<leader>fs` | 텍스트 검색 | 프로젝트 전체 텍스트 검색 |
 
-**Telescope 버퍼 목록 사용법:**
+**Snacks 버퍼 목록 사용법:**
 1. `<leader>fb` 입력
 2. 버퍼 이름 입력 (fuzzy search)
 3. `<CR>` (Enter)로 선택
 4. `<C-x>`: 수평 분할로 열기
 5. `<C-v>`: 수직 분할로 열기
-6. `<C-d>`: 버퍼 삭제
+6. `<C-q>`: Quickfix로 보내기
 
 #### ❌ 버퍼 닫기/삭제
 | 단축키 | 기능 | 설명 |
@@ -223,7 +224,7 @@ locs = {
 - [Neovim 공식 문서](https://neovim.io/doc/)
 - [Lazy.nvim](https://github.com/folke/lazy.nvim)
 - [Pyright](https://github.com/microsoft/pyright)
-- [Telescope.nvim](https://github.com/nvim-telescope/telescope.nvim)
+- [Snacks.nvim](https://github.com/folke/snacks.nvim)
 
 ---
 

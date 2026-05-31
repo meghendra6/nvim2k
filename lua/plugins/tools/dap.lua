@@ -59,7 +59,23 @@ end
 dap.listeners.before.event_exited['dapui_config'] = function()
     dapui.close()
 end
-dap_python.setup(os.getenv("CONDA_PREFIX") .. "/bin/python")
+local function python_path()
+    local conda_prefix = os.getenv('CONDA_PREFIX')
+    if conda_prefix and conda_prefix ~= '' then
+        return conda_prefix .. '/bin/python'
+    end
+
+    local cwd = vim.fn.getcwd()
+    if vim.fn.executable(cwd .. '/venv/bin/python') == 1 then
+        return cwd .. '/venv/bin/python'
+    elseif vim.fn.executable(cwd .. '/.venv/bin/python') == 1 then
+        return cwd .. '/.venv/bin/python'
+    end
+
+    return vim.fn.exepath('python3') ~= '' and vim.fn.exepath('python3') or 'python'
+end
+
+dap_python.setup(python_path())
 
 dap.adapters.python = {
     type = 'executable',
@@ -74,23 +90,7 @@ dap.configurations.python = {
         name = 'Launch file',
 
         program = '${file}',
-        pythonPath = function()
-            -- Conda 환경의 Python 경로 감지
-            local conda_prefix = os.getenv("CONDA_PREFIX")
-            if conda_prefix then
-                return conda_prefix .. "/bin/python"
-            end
-
-            -- 프로젝트 내 가상환경 감지
-            local cwd = vim.fn.getcwd()
-            if vim.fn.executable(cwd .. '/venv/bin/python') == 1 then
-                return cwd .. '/venv/bin/python'
-            elseif vim.fn.executable(cwd .. '/.venv/bin/python') == 1 then
-                return cwd .. '/.venv/bin/python'
-            else
-                return '/usr/bin/python'
-            end
-        end,
+        pythonPath = python_path,
     },
 }
 

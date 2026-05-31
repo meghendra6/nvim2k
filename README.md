@@ -167,8 +167,6 @@ I have been using vim/neovim for 7+ years now, I wanted to share my config for e
 ### 🔍 More Info
 
 - [tdo.nvim](https://github.com/2kabhishek/tdo.nvim) — note taking system in neovim
-- [termim.nvim](https://github.com/2kabhishek/termim.nvim) — enhanced neovim terminal
-- [nerdy.nvim](https://github.com/2kabhishek/nerdy.nvim) — search nerdfont glyphs from inside neovim
 - [co-author.nvim](https://github.com/2kabhishek/co-author.nvim) — add co authors to your git commits
 
 <hr>
