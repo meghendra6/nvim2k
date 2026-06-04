@@ -99,14 +99,16 @@ local plugins = {
         event = { 'BufReadPost', 'BufNewFile' },
     },
 
-    -- Tresitter
+    -- Treesitter
+    -- `main` branch (Neovim 0.12+). Highlighting/folding/injections are provided
+    -- by Neovim core; this plugin manages parser install/update. The legacy
+    -- `master` branch is EOL and does not support Neovim 0.12.
     {
         'nvim-treesitter/nvim-treesitter',
+        branch = 'main',
         build = ':TSUpdate',
         dependencies = {
-            'nvim-treesitter/nvim-treesitter-refactor',
-            'nvim-treesitter/nvim-treesitter-textobjects',
-            'RRethy/nvim-treesitter-textsubjects',
+            { 'nvim-treesitter/nvim-treesitter-textobjects', branch = 'main' },
         },
         config = load_config('lang.treesitter'),
         event = { 'BufReadPre', 'BufNewFile' },
@@ -518,7 +520,12 @@ if util.is_present('java') then
     table.insert(lsp_servers, 'jdtls')
 end
 
-if util.is_present('pip') then
+if
+    util.is_present('pip')
+    or util.is_present('pip3')
+    or util.is_present('python3')
+    or util.is_present('python')
+then
     table.insert(lsp_servers, 'ruff')
     table.insert(lsp_servers, 'pyright')
 end
@@ -531,7 +538,12 @@ if util.is_present('cargo') then
     table.insert(lsp_servers, 'rust_analyzer')
 end
 
-if util.is_present('clangd') then
+if
+    util.is_present('clangd')
+    or util.is_present('cc')
+    or util.is_present('gcc')
+    or util.is_present('clang')
+then
     table.insert(lsp_servers, 'clangd')
 end
 
